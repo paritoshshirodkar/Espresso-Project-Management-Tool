@@ -175,8 +175,8 @@ public class DashboardController implements Initializable {
     private TableView<Answer> answerTableView;
     @FXML
     private TableColumn<Answer, Integer> answerIDColumn;
-    //@FXML
-    //private TableColumn<Answer, Integer> aquestionIDColumn;
+//    @FXML
+//    private TableColumn<Answer, Integer> aquestionIDColumn;
     @FXML
     private TableColumn<Answer, String> answerColumn;
     @FXML
@@ -286,11 +286,11 @@ public class DashboardController implements Initializable {
         taskIdColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
         tboardNameColumn.setCellValueFactory(new PropertyValueFactory<>("boardName"));
         taskNameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
-        employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("taskName"));
+        employeeNameColumn.setCellValueFactory(new PropertyValueFactory<>("employeeName"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("statusID"));
         priorityColumn.setCellValueFactory(new PropertyValueFactory<>("priorityID"));
         weightageColumn.setCellValueFactory(new PropertyValueFactory<>("Weightage"));
-        deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("priorityID"));
+        deadlineColumn.setCellValueFactory(new PropertyValueFactory<>("deadline"));
     }
 
     private void initQuestionTableColumn() {
@@ -418,6 +418,60 @@ public class DashboardController implements Initializable {
         System.out.println("Task list displayed");
 
     }
+    
+    
+    // method to load the data into the table from the database for the given board name
+    public void loadDataTasks(String bN) {
+
+        // List to store the tasks
+        ObservableList<Task> taskList = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = null;
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("ClassNotFoundException in loadDataTasks(String boardName)");
+            }
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
+            } catch (SQLException ex) {
+                System.out.println("SQLException in  loadDataTasks(String boardName) while loading driver");
+            }
+            String taskListQuery = "SELECT * FROM task WHERE board_name='" + bN +"';";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(taskListQuery);
+            while (rs.next()) {
+                int taskID = rs.getInt("task_id");
+                String boardName = rs.getString("board_name");
+                String taskName = rs.getString("task_name");
+                String employeeName = rs.getString("employee_first_name");
+                int statusID = rs.getInt("status_id");
+                int priorityID = rs.getInt("priority_id");
+                int weightage = rs.getInt("weightage");
+                String deadline = rs.getString("deadline");
+
+                taskList.add(new Task(taskID, boardName, taskName, employeeName, statusID, priorityID, weightage, deadline));
+
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("SQLException in loadDataTasks(String boardName) while closing connection");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException in loadDataTasks(String boardName)");
+        }
+        System.out.println(taskList);
+        taskTableView.getItems().setAll(taskList);
+        System.out.println("Specific Task list displayed");
+
+    }
+
+    
+    
+    
+    
 
     // method to decide which AnchorPane is to be loaded
     @FXML
@@ -817,15 +871,17 @@ public class DashboardController implements Initializable {
     void viewTask(ActionEvent event) {
         selectedBoardList = boardTableView.getSelectionModel().getSelectedItems();
 
-        System.out.println(selectedBoardList.size());
+//        System.out.println(selectedBoardList.size());
         String board_name = selectedBoardList.get(0).boardName.getValue();
         System.out.println(board_name + " board selected");
         //loadWindowTask("TaskTable.fxml", "paritosh", board_name);
         //loadWindow("TaskTable.fxml", board_name);
-        taskAnchorPane.toFront();
+        
         initTaskColumns();
-        loadDataTasks();
+        loadDataTasks(board_name);
+        taskAnchorPane.toFront();
         taskAnchorPane.setVisible(true);
+        //taskTableView.setVisible(true);
 
     }
 

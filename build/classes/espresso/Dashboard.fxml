@@ -129,7 +129,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="boardsAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="boardsAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView fx:id="boardTableView" prefHeight="760.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
