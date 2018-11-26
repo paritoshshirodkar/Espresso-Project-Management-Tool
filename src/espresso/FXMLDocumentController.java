@@ -68,7 +68,7 @@ public class FXMLDocumentController implements Initializable {
         
         // if block is entered if both username and password are correct
         if (username.getText().equals(employee.getEmail()) && matched) {
-            loadWindow("Dashboard.fxml", "PMT", username.getText());
+            loadWindow("Dashboard.fxml", "Espresso", username.getText());
             System.out.println("Sign In Successful");
             
             // code to close signinPane

@@ -64,6 +64,28 @@ public class AnswerDAO {
         return count;
     }
     
+    
+    public int answerCount(int qID) {
+
+        int count = 0;
+        AnswerDAO adao = new AnswerDAO();
+        adao.connect();
+        try {
+            String query = "SELECT COUNT(*) FROM answer WHERE q_id=" + qID + ";";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count = rs.getInt(1);
+            adao.closeConnection();
+            return count;
+        } catch (SQLException ex) {
+            adao.closeConnection();
+            System.out.println("SQLException in answerCount(in qID)");
+        }
+        return count;
+    }
+    
+    
     // method to add a Answer
     public void addAnswer(int answerID, int qID, String answer, int employeeID, int upvotes, int downvotes) throws IOException {
         String query = "insert into answer values (?,?,?,?,?,?)";
@@ -83,6 +105,28 @@ public class AnswerDAO {
             System.out.println("SQLException in addAnswer()");
         }
     }
+    
+    // method to get the answers for the respective questionID
+    public int getAnswers(int qID) {
+
+        int count = 0;
+        AnswerDAO adao = new AnswerDAO();
+        adao.connect();
+        try {
+            String query = "SELECT * FROM answer WHERE q_id=" + qID + ";";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count = rs.getInt(1);
+            adao.closeConnection();
+            return count;
+        } catch (SQLException ex) {
+            adao.closeConnection();
+            System.out.println("SQLException in answerCount()");
+        }
+        return count;
+    } 
+    
     
     
     

@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="signupPane" maxHeight="835.0" maxWidth="635.0" minHeight="535.0" minWidth="635.0" prefHeight="505.0" prefWidth="642.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.SignupController">
+<AnchorPane id="AnchorPane" fx:id="signupPane" maxHeight="835.0" maxWidth="635.0" minHeight="535.0" minWidth="635.0" prefHeight="505.0" prefWidth="642.0" stylesheets="@AddBoard.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.SignupController">
    <children>
       <AnchorPane fx:id="ap" layoutX="6.0" prefHeight="509.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
