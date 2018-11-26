@@ -1,10 +1,10 @@
 package espresso;
 
-import dao.AnswerDAO;
 import dao.BoardDAO;
 import dao.Employee;
 import dao.EmployeeDAO;
 import dao.QuestionDAO;
+import dao.TaskDAO;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -23,6 +24,12 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.chart.BarChart;
+import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
+import javafx.scene.chart.PieChart;
+import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
@@ -35,7 +42,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import sun.java2d.pipe.SpanShapeRenderer.Simple;
 
 /**
  * FXML Controller class
@@ -201,13 +207,71 @@ public class DashboardController implements Initializable {
     // List to store all the selected Questions
     ObservableList<Question> selectedQuestionsList = FXCollections.observableArrayList();
     
+
+    
+    
+    
+    
+    
+    @FXML
+    private TextField analysisBoardNameTextField;
+    private Button barCharButton;
+    @FXML
+    private Button pieChartButton;
+    @FXML
+    private Button lineChartButton;
+    @FXML
+    private AnchorPane barChartAnchorPane;
+    @FXML
+    private AnchorPane pieChartAnchorPane;
+    @FXML
+    private AnchorPane lineChartAnchorPane;
+    @FXML
+    private BarChart<String, Integer> WorkDoneBarChart;
+    @FXML
+    private NumberAxis y;
+    @FXML
+    private CategoryAxis x;
+    @FXML
+    private Button backButtonBarChart;
+    @FXML
+    private Button backButtonPieChart;
+    @FXML
+    private LineChart<?, ?> LineChart;
+    @FXML
+    private Button backButtonLineChart;
+    @FXML
+    private Button barChartButton;
+    @FXML
+    private PieChart pieChart;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        // disabling the visibility of all the AnchorPane/s except dashboard
+//        dashboardPane.setVisible(true);
+//        mainAnchorPane.setVisible(false);
+//        inboxAnchorPane.setVisible(false);
+//        addBoardPane.setVisible(false);
+//        boardsAnchorPane.setVisible(false);
+//        myTaskAnchorPane.setVisible(false);
+//        questionTableAnchorPane.setVisible(false);
+//        analysisAnchorPane.setVisible(false);
+//        taskAnchorPane.setVisible(false);
+//        postQuestionAnchorPane.setVisible(false);
+//        answerTableAnchorPane.setVisible(false);
+//        barChartAnchorPane.setVisible(false);
+//        pieChartAnchorPane.setVisible(false);
+//        lineChartAnchorPane.setVisible(false);
+
+
+
         //method to initiate columns
         initColumns();
+        
+        
 
     }
 
@@ -495,6 +559,166 @@ public class DashboardController implements Initializable {
     @FXML
     private void downvote(ActionEvent event) {
     }
+    
+    
+    
+    // code to handle the button click events of analysis pane
+    @FXML
+    private void handleChartButtonClick(ActionEvent event) {
+        
+        if (event.getSource() == barChartButton) {
+            showBarChart(analysisBoardNameTextField.getText());
+            barChartAnchorPane.toFront();
+            barChartAnchorPane.setVisible(true);
+            pieChartAnchorPane.setVisible(false);
+            lineChartAnchorPane.setVisible(false);
+            
+            
+            
+          
+           
+
+        }
+        if (event.getSource() == pieChartButton) {
+            pieChartAnchorPane.toFront();
+            barChartAnchorPane.setVisible(false);
+            pieChartAnchorPane.setVisible(true);
+            lineChartAnchorPane.setVisible(false);
+            showPieChart(analysisBoardNameTextField.getText());
+
+        }
+        if (event.getSource() == lineChartButton) {
+            showLineChart(analysisBoardNameTextField.getText());
+            lineChartAnchorPane.toFront();
+            barChartAnchorPane.setVisible(false);
+            pieChartAnchorPane.setVisible(false);
+            lineChartAnchorPane.setVisible(true);
+            
+
+        }
+    }
+    
+    
+    // method to display bar chart
+    public void showBarChart(String boardName){
+            
+            // to get the data from database
+            ArrayList<String> taskNameList = new ArrayList<String>();
+            ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
+            TaskDAO tdao = new TaskDAO();
+            tdao.connect();
+            taskNameList = tdao.getTaskNames(boardName);
+            System.out.println(taskNameList);
+            taskWeightageList = tdao.getTaskWeightage(boardName);
+            
+            // for verification purposes
+            for (int i = 0; i < taskNameList.size(); i++) {
+                System.out.println(taskNameList.get(i) + "\t" + taskWeightageList.get(i));
+            }
+            tdao.closeConnection();
+            
+            // to display Bar Chart
+
+           XYChart.Series<String, Integer> set = new XYChart.Series<>();
+            
+            for(int i=0; i < taskNameList.size(); i++){
+                String x_axis_values = taskNameList.get(i);
+                System.out.println(x_axis_values);
+                int y_axis_values = taskWeightageList.get(i);
+                System.out.println(y_axis_values);
+                set.getData().add(new XYChart.Data<>(x_axis_values, y_axis_values));
+               
+            }
+            
+            WorkDoneBarChart.getData().add(set);
+   
+    }
+    
+
+    
+   // method to show pie chart
+    public void showPieChart(String boardName){
+        
+        // to get the data from database
+        ArrayList<String> taskNameList = new ArrayList<String>();
+        ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        taskNameList = tdao.getTaskNames(boardName);
+        System.out.println(taskNameList);
+        taskWeightageList = tdao.getTaskWeightage(boardName);
+
+        // for verification purposes
+        for (int i = 0; i < taskNameList.size(); i++) {
+            System.out.println(taskNameList.get(i) + "\t" + taskWeightageList.get(i));
+        }
+        tdao.closeConnection();
+
+        // to display Bar Chart
+        
+        ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
+        for (int i = 0; i < taskNameList.size(); i++) {
+            pieChartData.add(new PieChart.Data(taskNameList.get(i), taskWeightageList.get(i)));
+        }
+        
+        pieChart.setData(pieChartData);
+    }
+    
+    
+    
+    // method to display line chart
+    public void showLineChart(){
+        XYChart.Series series = new XYChart.Series(); //Make a new XYChart object
+        //Add Data
+            series.getData().add(new XYChart.Data("1", 23));
+            series.getData().add(new XYChart.Data("2", 14));
+            series.getData().add(new XYChart.Data("3", 15));
+            
+        XYChart.Series series2 = new XYChart.Series(); //Make a new XYChart object
+        //Add Data
+            series2.getData().add(new XYChart.Data("1", 50));
+            series2.getData().add(new XYChart.Data("2", 60));
+            series2.getData().add(new XYChart.Data("3", 90));
+             LineChart.getData().addAll(series, series2); 
+               
+    }
+    
+    // method to display line chart
+    public void showLineChart(String boardName){
+        
+        // to get the data from database
+        ArrayList<String> taskNameList = new ArrayList<String>();
+        ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        taskNameList = tdao.getTaskNames(boardName);
+        System.out.println(taskNameList);
+        taskWeightageList = tdao.getTaskWeightage(boardName);
+        
+        
+        
+        XYChart.Series series = new XYChart.Series(); //Make a new XYChart object
+        //Add Data
+        for(int i=0; i<taskNameList.size(); i++){
+            String x_axis_values = taskNameList.get(i);
+            int y_axis_values = taskWeightageList.get(i);
+            series.getData().add(new XYChart.Data(x_axis_values, y_axis_values));
+            
+        }
+      
+        LineChart.getData().addAll(series); 
+               
+    }
+    
+    
+    
+
+    @FXML
+    private void goToAnalysis(ActionEvent event) {
+        analysisAnchorPane.toFront();
+        analysisAnchorPane.setVisible(true);
+    }
+    
 
     public static class Board {
 
@@ -521,6 +745,10 @@ public class DashboardController implements Initializable {
         }
 
     }
+    
+    
+  
+    
 
     // creating class Task
     public static class Task {

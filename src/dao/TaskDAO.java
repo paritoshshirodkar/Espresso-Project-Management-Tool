@@ -4,7 +4,10 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import javafx.scene.control.Alert;
 
 /**
@@ -68,6 +71,46 @@ public class TaskDAO {
         } catch(SQLException ex){
             System.out.println("SQLException in addTask()");
         }        
+    }
+        
+        
+    // method returns Task names
+    public ArrayList<String> getTaskNames(String boardName){
+        
+        ArrayList<String> taskNames = new ArrayList<String>();
+        String query = "select task_name from task where board_name='" + boardName + "';";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                taskNames.add(rs.getString("task_name"));
+            }
+            
+            return taskNames;
+        } catch (SQLException ex) {
+            System.out.println("SQLException in getTaskNames(String boardName)");
+        }
+        return taskNames;       
+    }
+    
+    
+    // method returns Task weightage
+    public ArrayList<Integer> getTaskWeightage(String boardName){
+        
+        ArrayList<Integer> taskWeightage = new ArrayList<Integer>();
+        String query = "select weightage from task where board_name='" + boardName + "';";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while(rs.next()){
+                taskWeightage.add(rs.getInt("weightage"));
+            }
+            
+            return taskWeightage;
+        } catch (SQLException ex) {
+            System.out.println("SQLException in getTaskWeightage(String boardName)");
+        }
+        return taskWeightage;       
     }
     
     
