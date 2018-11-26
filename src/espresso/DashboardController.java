@@ -1,5 +1,6 @@
 package espresso;
 
+import dao.AnswerDAO;
 import dao.BoardDAO;
 import dao.Employee;
 import dao.EmployeeDAO;
@@ -174,8 +175,8 @@ public class DashboardController implements Initializable {
     private TableView<Answer> answerTableView;
     @FXML
     private TableColumn<Answer, Integer> answerIDColumn;
-    @FXML
-    private TableColumn<Answer, Integer> aquestionIDColumn;
+    //@FXML
+    //private TableColumn<Answer, Integer> aquestionIDColumn;
     @FXML
     private TableColumn<Answer, String> answerColumn;
     @FXML
@@ -302,15 +303,15 @@ public class DashboardController implements Initializable {
         
     }
     
-    private void initAnswerTableColumn(){
+    private void initAnswerTableColumn(int selectedQID){
         answerIDColumn.setCellValueFactory(new PropertyValueFactory<>("answerID"));
-        aquestionIDColumn.setCellValueFactory(new PropertyValueFactory<>("qID"));
+        //aquestionIDColumn.setCellValueFactory(new PropertyValueFactory<>("qID"));
         answerColumn.setCellValueFactory(new PropertyValueFactory<>("answer"));
         employeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
         upvotesColumn.setCellValueFactory(new PropertyValueFactory<>("upvotes"));
         downvotesColumn.setCellValueFactory(new PropertyValueFactory<>("downvotes"));
         
-        answerTableView.getItems().setAll(Answer.loadAnswerTable());
+        answerTableView.getItems().setAll(Answer.loadAnswerTable(selectedQID));
         answerTableOptions.setVisible(true);
         System.out.println("Answer options displayed");
         
@@ -509,17 +510,22 @@ public class DashboardController implements Initializable {
         int selectedQID = selectedQuestionsList.get(0).getQuestonID();
         System.out.println(selectedQID);
         
-//        AnswerDAO adao = new AnswerDAO();
-//        adao.connect();
-//        System.out.println(adao.answerCount(selectedQID));
-        
-        //answerTableView.getItems().setAll(Answer.loadAnswerTable(selectedQID));
+        AnswerDAO adao = new AnswerDAO();
+        adao.connect();
+        System.out.println(adao.answerCount(selectedQID));
+        initAnswerTableColumn(selectedQID);
+//        answerTableView.getItems().setAll(Answer.loadAnswerTable(selectedQID));
 //        System.out.println();
-        answerTableView.getItems().setAll(Answer.loadAnswerTable());
+        //answerTableView.getItems().setAll(Answer.loadAnswerTable());
         answerTableAnchorPane.toFront();
         answerTableAnchorPane.setVisible(true);
         answerTableView.setVisible(true);
         answerTableOptions.setVisible(true);
+
+//        ObservableList<Answer> test = FXCollections.observableArrayList();
+//        test = Answer.loadAnswerTable(selectedQID);
+//        System.out.println(test);
+//        System.out.println("cp");
 
     }
 

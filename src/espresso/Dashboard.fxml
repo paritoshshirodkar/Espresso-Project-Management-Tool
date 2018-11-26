@@ -169,7 +169,7 @@
                                  <children>
                                     <Button fx:id="postQuestionButton" mnemonicParsing="false" onAction="#postQuestion" prefHeight="50.0" prefWidth="198.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Post Question" />
                                     <Button fx:id="lookAtAnswersButton" mnemonicParsing="false" onAction="#showAnswers" prefHeight="50.0" prefWidth="209.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Look at Answers" />
-                                    <Button fx:id="answerButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#answer" prefHeight="50.0" prefWidth="240.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Answer" />
+                                    <Button fx:id="answerButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#answer" prefHeight="50.0" prefWidth="245.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Answer" />
                                  </children>
                               </HBox>
                            </children>
@@ -301,7 +301,6 @@
                               <TableView fx:id="answerTableView" prefHeight="554.0" prefWidth="650.0">
                                  <columns>
                                     <TableColumn fx:id="answerIDColumn" prefWidth="75.0" text="Answer ID" />
-                                    <TableColumn fx:id="aquestionIDColumn" prefWidth="75.0" text="Question ID" />
                                     <TableColumn fx:id="answerColumn" prefWidth="75.0" text="Answer" />
                                     <TableColumn fx:id="employeeIDColumn" prefWidth="75.0" text="Employee ID" />
                                     <TableColumn fx:id="upvotesColumn" prefWidth="75.0" text="Upvotes" />

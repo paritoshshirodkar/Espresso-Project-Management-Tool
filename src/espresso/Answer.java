@@ -85,6 +85,7 @@ public class Answer {
             
             while (rs.next()) {
                 int answerID = rs.getInt("answer_id");
+                //int questionID = qID;
                 int questionID = rs.getInt("q_id");
                 String answer  = rs.getString("answer");
                 int employeeID = rs.getInt("employee_id");
@@ -133,7 +134,8 @@ public class Answer {
             
             while (rs.next()) {
                 int answerID = rs.getInt("answer_id");
-                int questionID = rs.getInt("q_id");
+                int questionID = qID;
+                //int questionID = rs.getInt("q_id");
                 String answer  = rs.getString("answer");
                 int employeeID = rs.getInt("employee_id");     
                 int upvotes = rs.getInt("up_votes");
