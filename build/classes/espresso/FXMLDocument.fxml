@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="signinPane" prefHeight="374.0" prefWidth="481.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.FXMLDocumentController">
+   <children>
+      <AnchorPane prefHeight="374.0" prefWidth="481.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Label layoutX="197.0" layoutY="40.0" text="Sign In" textFill="#03a9f4">
+               <font>
+                  <Font size="28.0" />
+               </font>
+            </Label>
+            <TextField fx:id="username" alignment="CENTER" layoutX="119.0" layoutY="104.0" prefHeight="26.0" prefWidth="241.0" promptText="Username" />
+            <PasswordField fx:id="password" alignment="CENTER" layoutX="118.0" layoutY="174.0" prefHeight="26.0" prefWidth="242.0" promptText="Password" />
+            <Button fx:id="signInButton" layoutX="118.0" layoutY="285.0" mnemonicParsing="false" onAction="#signIn" prefHeight="26.0" prefWidth="113.0" stylesheets="@AddBoard.css" text="Sign In" />
+            <Button fx:id="registerButton" layoutX="246.0" layoutY="285.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="114.0" stylesheets="@AddBoard.css" text="Sign Up" />
+            <Label fx:id="pwdValidationLabel" layoutX="119.0" layoutY="225.0" prefHeight="18.0" prefWidth="242.0" text="Label" visible="false" />
+            <Label fx:id="usernameValidationLabel" layoutX="118.0" layoutY="149.0" prefHeight="18.0" prefWidth="242.0" text="Label" visible="false" />
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>
