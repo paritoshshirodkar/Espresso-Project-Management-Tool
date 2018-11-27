@@ -115,6 +115,7 @@ public class TaskDAO {
             LogDAO ldao = new LogDAO();
             ldao.connect();
             ldao.updateLog(task_id,task_name,deadline);
+            ldao.updateUserLog(ldao.highestUserlogID()+1000, task_name, deadline);
             ldao.closeConnection();
         } catch(SQLException ex){
             System.out.println("SQLException in updateTask()");

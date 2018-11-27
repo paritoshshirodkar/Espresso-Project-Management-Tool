@@ -207,6 +207,12 @@ public class DashboardController implements Initializable {
     // List to store all the selected Questions
     ObservableList<Question> selectedQuestionsList = FXCollections.observableArrayList();
     
+    // List to store all the Logs 
+    ObservableList<Log> logList = FXCollections.observableArrayList();
+
+    // List to store all the selected Logs
+    ObservableList<Log> selectedLogList = FXCollections.observableArrayList();
+    
 
     
     
@@ -334,6 +340,18 @@ public class DashboardController implements Initializable {
     private Button downvoteAnswerButton;
     @FXML
     private Label answerIDLabel;
+    @FXML
+    private TableView<Log> logTableView;
+    @FXML
+    private TableColumn<Log, Integer> logIDColumn;
+    @FXML
+    private TableColumn<Log, Integer> taskIDColumn;
+    @FXML
+    private TableColumn<Log, String> messageColumn;
+    @FXML
+    private TableColumn<Log, String> timestampColumn;
+    @FXML
+    private Button logSeenButton;
     
     /**
      * Initializes the controller class.
@@ -360,6 +378,7 @@ public class DashboardController implements Initializable {
 
         //method to initiate columns
         initColumns();
+        initLogColumns();
         
         
 
@@ -369,6 +388,13 @@ public class DashboardController implements Initializable {
         boardIDColumn.setCellValueFactory(new PropertyValueFactory<>("boardID"));
         boardNameColumn.setCellValueFactory(new PropertyValueFactory<>("boardName"));
         projectLeadColumn.setCellValueFactory(new PropertyValueFactory<>("projectLead"));
+    }
+    
+    private void initLogColumns() {
+        logIDColumn.setCellValueFactory(new PropertyValueFactory<>("logID"));
+        taskIDColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
+        messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
+        timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
     }
 
     private void initTaskColumns() {
@@ -425,7 +451,7 @@ public class DashboardController implements Initializable {
             try {
                 Class.forName("com.mysql.jdbc.Driver");
             } catch (ClassNotFoundException ex) {
-                System.out.println("ClassNotFoundException in loadData()");
+                System.out.println("ClassNotFoundException in loadDataBoards()");
             }
             try {
                 connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
@@ -447,10 +473,10 @@ public class DashboardController implements Initializable {
             try {
                 connection.close();
             } catch (SQLException ex) {
-                System.out.println("SQLException in loadData() while closing connection");
+                System.out.println("SQLException in loadDataBoards() while closing connection");
             }
         } catch (SQLException ex) {
-            System.out.println("SQLException in loadData()");
+            System.out.println("SQLException in loadDataBoards()");
         }
 
         boardTableView.getItems().setAll(boardList);
@@ -459,6 +485,60 @@ public class DashboardController implements Initializable {
         System.out.println("Board options displayed");
 
     }
+    
+    
+    
+    
+    // method to load the data into the table from the database
+    public void loadDataLogs() {
+
+        // List to store the Logs 
+        ObservableList<Log> logList = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = null;
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("ClassNotFoundException in loadDataLogs()");
+            }
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
+            } catch (SQLException ex) {
+                System.out.println("SQLException in  loadDataLogs() while loading driver");
+            }
+            String query = "SELECT * FROM log_user;";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                int logID = rs.getInt("log_id");
+                int taskID = rs.getInt("task_id");
+                String message = rs.getString("message");
+                String timestamp = rs.getString("timestamp");
+
+                // adding the Board to the boardList
+                logList.add(new Log(logID, taskID, message, timestamp));
+
+            }
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("SQLException in loadDataLogs() while closing connection");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException in loadDataLogs()");
+        }
+
+        logTableView.getItems().setAll(logList);
+        System.out.println("Log list displayed");
+        
+
+    }
+    
+    
+    
+    
+    
 
     // method to load the data into the table from the database
     public void loadDataTasks() {
@@ -566,6 +646,7 @@ public class DashboardController implements Initializable {
     @FXML
     private void handleSidePanelButtonClick(ActionEvent event) {
         if (event.getSource() == inboxButton) {
+            loadDataLogs();
             inboxAnchorPane.toFront();
             inboxAnchorPane.setVisible(true);
 
@@ -738,7 +819,8 @@ public class DashboardController implements Initializable {
         String deadline = "27 NOV 2018";
         LogDAO ldao = new LogDAO();
         ldao.connect();
-        ldao.updateLog(ldao.logCount()+1000, answer, deadline);
+        ldao.updateLog(ldao.highestlogID()+1000, answer, deadline);
+        ldao.updateUserLog(ldao.highestUserlogID()+1000, answer, deadline);
         ldao.closeConnection();
         
         
@@ -757,7 +839,8 @@ public class DashboardController implements Initializable {
         String deadline = "27 NOV 2018";
         LogDAO ldao = new LogDAO();
         ldao.connect();
-        ldao.updateLog(ldao.logCount()+1000, answer, deadline);
+        ldao.updateLog(ldao.highestlogID()+1000, answer, deadline);
+        ldao.updateUserLog(ldao.highestUserlogID()+1000, answer, deadline);
         ldao.closeConnection();
         
     }
@@ -1034,6 +1117,7 @@ public class DashboardController implements Initializable {
         tdao.updateTask(Integer.parseInt(taskIDField1.getText()), boardNameField1.getText(), taskNameField1.getText(), employeeNameField1.getText(), statusID1, 1, priorityID1, Integer.parseInt(weightageField1.getText()), dateString);
         tdao.closeConnection();
     }
+
     
 
     public static class Board {
@@ -1062,6 +1146,41 @@ public class DashboardController implements Initializable {
 
     }
     
+    
+    
+        public static class Log {
+
+        private final SimpleIntegerProperty logID;
+        private final SimpleIntegerProperty taskID;
+        private final SimpleStringProperty message;
+        private final SimpleStringProperty timestamp;
+
+        public Log(int logID, int taskID, String message, String timestamp) {
+            this.logID = new SimpleIntegerProperty(logID);
+            this.taskID = new SimpleIntegerProperty(taskID);
+            this.message = new SimpleStringProperty(message);
+            this.timestamp = new SimpleStringProperty(timestamp);
+        }
+
+        public int getLogID() {
+            return logID.get();
+        }
+
+        public int getTaskID() {
+            return taskID.get();
+        }
+
+        public String getMessage() {
+            return message.get();
+        }
+
+        public String getTimestamp() {
+            return timestamp.get();
+        }
+
+
+
+    }
     
   
     
@@ -1213,6 +1332,28 @@ public class DashboardController implements Initializable {
         bdao.removeBoard(selectedBoardList.get(0).getBoardID());
         bdao.closeConnection();
     }
+    
+    
+    @FXML
+    private void logSeen(ActionEvent event) {
+        logList = logTableView.getItems();
+        selectedLogList = logTableView.getSelectionModel().getSelectedItems();
+        System.out.println("Deleted Log/s");
+        
+        selectedLogList.forEach(logList::remove);
+        
+        LogDAO ldao = new LogDAO();
+        ldao.connect();
+        ldao.removeLog(selectedLogList.get(0).getLogID());
+        ldao.closeConnection();
+        
+    }
+    
+    
+    
+    
+    
+  
 
     
 
