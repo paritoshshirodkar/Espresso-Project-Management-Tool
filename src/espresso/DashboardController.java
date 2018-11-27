@@ -877,7 +877,7 @@ public class DashboardController implements Initializable {
         try {
             tdao.addTask(Integer.parseInt(taskIDField.getText()), boardNameField.getText(), taskNameField.getText(), employeeNameField.getText(), statusID, changed, priorityID, Integer.parseInt(weightageField.getText()), dateString);
         } catch (IOException ex) {
-            System.out.println("Exception because of date");
+            System.out.println("Exception because of date.");
         }
         tdao.closeConnection();
     }
@@ -990,8 +990,25 @@ public class DashboardController implements Initializable {
 
     @FXML
     void createNewTask(ActionEvent event) {
+        // dynamically setting the task id and board name
+        
+        // code to set the board name dynamically
+        selectedBoardList = boardTableView.getSelectionModel().getSelectedItems();
+        String board_name = selectedBoardList.get(0).boardName.getValue();
+
+        // code to set the task id dynamically
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        int count = tdao.taskCount() + 1;
+        tdao.closeConnection();
+        String countString = "" + count;
+        taskIDField.setText(countString);
+        boardNameField.setText(board_name);
         createTaskPane.toFront();
         createTaskPane.setVisible(true);
+        taskNameField.clear();
+        employeeNameField.clear();
+        weightageField.clear();
     }
 
     private void showQuestions(ActionEvent event) {

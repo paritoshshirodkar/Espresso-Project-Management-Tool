@@ -114,6 +114,27 @@ public class TaskDAO {
     }
     
     
+    // method to count the number of tasks
+    public int taskCount() {
+
+        int count = 0;
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        try {
+            String query = "SELECT COUNT(*) FROM task;";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            count = rs.getInt(1);
+            tdao.closeConnection();
+            return count;
+        } catch (SQLException ex) {
+            tdao.closeConnection();
+            System.out.println("SQLException in taskCount()");
+        }
+        return count;
+    }
+    
     
     
 }

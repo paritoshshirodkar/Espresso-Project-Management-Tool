@@ -476,7 +476,7 @@
                                     <Insets left="10.0" right="10.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <Button fx:id="saveTask" mnemonicParsing="false" onAction="#saveTask" prefHeight="57.0" prefWidth="678.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Save Task">
+                              <Button fx:id="saveTask" mnemonicParsing="false" onAction="#saveTask" prefHeight="57.0" prefWidth="678.0" stylesheets="@AddBoard.css" text="Save Task">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
                                  </VBox.margin>
