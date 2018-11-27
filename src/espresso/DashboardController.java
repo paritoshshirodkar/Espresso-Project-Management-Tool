@@ -708,17 +708,30 @@ public class DashboardController implements Initializable {
         selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
         int selectedAnswerID = selectedAnswerList.get(0).getAnswerID();
         AnswerDAO adao = new AnswerDAO();
-        System.out.println("cp1");
+        adao.connect();
         int upvotes = adao.getUpVotes(selectedAnswerID);
-        System.out.println("cp3");
         upvotes++;
         adao.updateUpVotes(selectedAnswerID, upvotes);
         adao.closeConnection();
- 
+//        Answer.loadAnswerTable();
+//        answerTableAnchorPane.toFront();
+//        answerTableAnchorPane.setVisible(true);
+        
+        
     }
 
     @FXML
     private void downvote(ActionEvent event) {
+        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
+        selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
+        int selectedAnswerID = selectedAnswerList.get(0).getAnswerID();
+        AnswerDAO adao = new AnswerDAO();
+        adao.connect();
+        int downvotes = adao.getDownVotes(selectedAnswerID);
+        downvotes--;
+        adao.updateDownVotes(selectedAnswerID, downvotes);
+        adao.closeConnection();
+        
     }
     
     

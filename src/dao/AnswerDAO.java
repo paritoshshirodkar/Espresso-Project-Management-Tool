@@ -136,7 +136,6 @@ public class AnswerDAO {
             String query = "SELECT * FROM answer WHERE answer_id=" + answerID + ";";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(query);
-            System.out.println("cp2");
             rs.next();
             upvotes = rs.getInt("up_votes");
             System.out.println(upvotes);
@@ -144,10 +143,33 @@ public class AnswerDAO {
             return upvotes;
         } catch (SQLException ex) {
             adao.closeConnection();
-            System.out.println("SQLException in getUpVotes()");
+            System.out.println("SQLException in getUpVotes(int answerID)");
         }
         return upvotes;
-    }    
+    }
+
+
+    // method to get the number of down_votes
+    public int getDownVotes(int answerID){
+        int downvotes = 0;
+        AnswerDAO adao = new AnswerDAO();
+        adao.connect();
+        try {
+            String query = "SELECT * FROM answer WHERE answer_id=" + answerID + ";";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            rs.next();
+            downvotes = rs.getInt("down_votes");
+            adao.closeConnection();
+            return downvotes;
+        } catch (SQLException ex) {
+            adao.closeConnection();
+            System.out.println("SQLException in getDownVotes(int answerID)");
+        }
+        return downvotes;
+    }
+
+    
       
     // method to update the number of up_votes
     public void updateUpVotes(int answerID, int upvotes){
@@ -159,11 +181,25 @@ public class AnswerDAO {
            count = pst.executeUpdate();
            pst.close();
            System.out.println(count + " no. of row/s affected. up_votes added successfully");
-           
         }catch(SQLException ex){
-        
             System.out.println("SQLException in updateUpVotes(int answerID, int upvotes)");
+        }
         
+    }
+    
+    
+    // method to update the number of down_votes
+    public void updateDownVotes(int answerID, int downvotes){
+        
+        int count=0;
+        String q = "UPDATE answer SET down_votes=" + downvotes + " WHERE answer_id=" + answerID +";";
+        try{
+           PreparedStatement pst = connection.prepareStatement(q);
+           count = pst.executeUpdate();
+           pst.close();
+           System.out.println(count + " no. of row/s affected. down_votes added successfully");
+        }catch(SQLException ex){
+            System.out.println("SQLException in updateDownVotes(int answerID, int downvotes)");
         }
         
     }
