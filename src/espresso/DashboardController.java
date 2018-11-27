@@ -281,6 +281,16 @@ public class DashboardController implements Initializable {
     private DatePicker deadline;
     @FXML
     private Button saveTask;
+    @FXML
+    private AnchorPane addAnswerAnchorPane;
+    @FXML
+    private TextField questionIDTextField;
+    @FXML
+    private TextArea answer;
+    @FXML
+    private Button postQuestionButton1;
+    @FXML
+    private Button cancelButton1;
     
     /**
      * Initializes the controller class.
@@ -621,6 +631,14 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void answer(ActionEvent event) {
+//        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
+//        selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
+//        int selectedAnswerID = selectedAnswerList.get(0).getqID();
+//        String answerIDText = "" + selectedAnswerID;
+//        questionIDTextField.setText(answerIDText);
+        addAnswerAnchorPane.toFront();
+        addAnswerAnchorPane.setVisible(true);
+        
     }
 
     @FXML
@@ -880,6 +898,27 @@ public class DashboardController implements Initializable {
             System.out.println("Exception because of date.");
         }
         tdao.closeConnection();
+    }
+
+    @FXML
+    private void postAnswer(ActionEvent event) throws IOException {
+        AnswerDAO adao = new AnswerDAO();
+        adao.connect();
+        int count = adao.answerCount();
+        adao.addAnswer(++count, Integer.parseInt(questionIDTextField.getText()), answer.getText(), 1, 0, 0);
+        adao.closeConnection();
+        initAnswerTableColumn(Integer.parseInt(questionIDTextField.getText()));
+        answerTableAnchorPane.toFront();
+        answerTableAnchorPane.setVisible(true);
+        
+    }
+
+
+    @FXML
+    private void cancelAnswer(ActionEvent event) {
+        answerTableAnchorPane.toFront();
+        answerTableAnchorPane.setVisible(true);
+        
     }
     
 

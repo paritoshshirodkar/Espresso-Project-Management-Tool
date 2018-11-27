@@ -92,7 +92,7 @@
             </VBox>
             <AnchorPane fx:id="mainAnchorPane" prefHeight="560.0" prefWidth="650.0">
                <children>
-                  <AnchorPane fx:id="inboxAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane fx:id="inboxAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <AnchorPane id="AnchorPane" fx:id="addBoardPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="307.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -226,7 +226,7 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="taskAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="taskAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <TableView fx:id="taskTableView" layoutX="-325.0" prefHeight="500.0" prefWidth="644.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <columns>
@@ -245,7 +245,7 @@
                         </TableView>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="postQuestionAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="postQuestionAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -296,7 +296,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="answerTableAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="answerTableAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -323,7 +323,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="barChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="barChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -351,7 +351,7 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane fx:id="pieChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="pieChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="650.4">
                            <children>
@@ -368,7 +368,7 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane fx:id="lineChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="lineChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="650.4">
                            <children>
@@ -392,7 +392,7 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="createTaskPane" prefHeight="560.0" prefWidth="678.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="createTaskPane" prefHeight="560.0" prefWidth="678.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="494.0" prefWidth="678.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -484,6 +484,47 @@
                                     <Font size="20.0" />
                                  </font>
                               </Button>
+                           </children>
+                        </VBox>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane id="AnchorPane" fx:id="addAnswerAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <children>
+                              <TextField fx:id="questionIDTextField" alignment="CENTER" promptText="Question ID">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" right="10.0" top="40.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextField>
+                              <TextArea fx:id="answer" prefHeight="394.0" prefWidth="630.0" promptText="Enter Answer Here">
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="10.0" right="10.0" />
+                                 </VBox.margin>
+                                 <font>
+                                    <Font size="20.0" />
+                                 </font>
+                              </TextArea>
+                              <HBox prefHeight="100.0" prefWidth="200.0">
+                                 <children>
+                                    <Button fx:id="postQuestionButton1" mnemonicParsing="false" onAction="#postAnswer" prefHeight="55.0" prefWidth="300.0" stylesheets="@AddBoard.css" text="Post Answer">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                    <Button fx:id="cancelButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelAnswer" prefHeight="55.0" prefWidth="323.0" style="-fx-background-color: #e53935;" stylesheets="@AddBoard.css" text="Cancel" textFill="WHITE">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <padding>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </padding>
+                              </HBox>
                            </children>
                         </VBox>
                      </children>
