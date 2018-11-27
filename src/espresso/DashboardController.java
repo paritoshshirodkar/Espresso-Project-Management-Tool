@@ -100,8 +100,6 @@ public class DashboardController implements Initializable {
     @FXML
     private Button inboxButton;
     @FXML
-    private Button myTaskButton;
-    @FXML
     private Button analysisButton;
     @FXML
     private AnchorPane mainAnchorPane;
@@ -377,6 +375,8 @@ public class DashboardController implements Initializable {
 
 
         //method to initiate columns
+        
+        username.setText("apt@apt.com");
         initColumns();
         initLogColumns();
         
@@ -662,11 +662,11 @@ public class DashboardController implements Initializable {
             boardsAnchorPane.setVisible(true);
 
         }
-        if (event.getSource() == myTaskButton) {
-            loadDataTasks();
-            myTaskAnchorPane.toFront();
-            myTaskAnchorPane.setVisible(true);
-        }
+//        if (event.getSource() == myTaskButton) {
+//            loadDataTasks();
+//            taskAnchorPane.toFront();
+//            taskAnchorPane.setVisible(true);
+//        }
         if (event.getSource() == qandaButton) {
             questionTableAnchorPane.toFront();
             initQuestionTableColumn();

@@ -76,10 +76,6 @@
                      <font>
                         <Font size="18.0" />
                      </font></Button>
-                  <Button fx:id="myTaskButton" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onAction="#handleSidePanelButtonClick" prefHeight="78.0" prefWidth="150.0" stylesheets="@AddBoard.css" text="My Task">
-                     <font>
-                        <Font size="18.0" />
-                     </font></Button>
                   <Button fx:id="qandaButton" layoutX="10.0" layoutY="198.0" mnemonicParsing="false" onAction="#handleSidePanelButtonClick" prefHeight="78.0" prefWidth="150.0" stylesheets="@AddBoard.css" text="Q &amp; A">
                      <font>
                         <Font size="18.0" />
@@ -187,7 +183,7 @@
                         </HBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="myTaskAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane fx:id="myTaskAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
                   <AnchorPane id="AnchorPane" fx:id="questionTableAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
