@@ -32,8 +32,10 @@ import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -245,6 +247,40 @@ public class DashboardController implements Initializable {
     private Button barChartButton;
     @FXML
     private PieChart pieChart;
+    @FXML
+    private AnchorPane createTaskPane;
+    @FXML
+    private TextField taskIDField;
+    @FXML
+    private TextField boardNameField;
+    @FXML
+    private TextField taskNameField;
+    @FXML
+    private TextField employeeNameField;
+    @FXML
+    private TextField weightageField;
+    @FXML
+    private SplitMenuButton status;
+    @FXML
+    private MenuItem startedMenuItem;
+    @FXML
+    private MenuItem workingMenuItem;
+    @FXML
+    private MenuItem stuckMenuItem;
+    @FXML
+    private MenuItem halfwayMenuItem;
+    @FXML
+    private MenuItem doneMenuItem;
+    @FXML
+    private MenuItem highMenuItem;
+    @FXML
+    private MenuItem mediumMenuItem;
+    @FXML
+    private MenuItem lowMenuItem;
+    @FXML
+    private DatePicker deadline;
+    @FXML
+    private Button saveTask;
     
     /**
      * Initializes the controller class.
@@ -778,6 +814,73 @@ public class DashboardController implements Initializable {
         analysisAnchorPane.toFront();
         analysisAnchorPane.setVisible(true);
     }
+
+    // variables to store status and priority id
+    int statusID, priorityID; 
+    
+    
+    @FXML
+    private void startedSelected(ActionEvent event) {
+        statusID = 1;
+    }
+
+    @FXML
+    private void woiSelected(ActionEvent event) {
+        statusID = 2;
+    }
+
+    @FXML
+    private void stuckSelected(ActionEvent event) {
+        statusID = 3;
+    }
+
+    @FXML
+    private void halfwayPointSelected(ActionEvent event) {
+        statusID = 4;
+    }
+
+    @FXML
+    private void doneSelected(ActionEvent event) {
+        statusID = 5;
+    }
+
+    @FXML
+    private void highSelected(ActionEvent event) {
+        priorityID = 1;
+    }
+
+    @FXML
+    private void mediumSelected(ActionEvent event) {
+        priorityID = 2;
+    }
+
+    @FXML
+    private void lowSelected(ActionEvent event) {
+        priorityID = 3;
+    }
+
+    @FXML
+    private void saveTask(ActionEvent event) {
+
+        // changed variable to indicate a change in status or priority
+        // 0 indicates no change, otherwise 1
+        int changed = 0;
+
+        // converting the date to String
+//        LocalDate localDate = deadline.getValue();
+//        DateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
+//        String dateString = dateFormat.format(localDate);
+//        System.out.println(dateString);
+        String dateString = "27 NOV 2018";
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        try {
+            tdao.addTask(Integer.parseInt(taskIDField.getText()), boardNameField.getText(), taskNameField.getText(), employeeNameField.getText(), statusID, changed, priorityID, Integer.parseInt(weightageField.getText()), dateString);
+        } catch (IOException ex) {
+            System.out.println("Exception because of date");
+        }
+        tdao.closeConnection();
+    }
     
 
     public static class Board {
@@ -887,8 +990,8 @@ public class DashboardController implements Initializable {
 
     @FXML
     void createNewTask(ActionEvent event) {
-        System.out.println(event.getTarget().toString());
-        loadWindow("AddTask.fxml", "Create new Task");
+        createTaskPane.toFront();
+        createTaskPane.setVisible(true);
     }
 
     private void showQuestions(ActionEvent event) {
