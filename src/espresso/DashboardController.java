@@ -4,6 +4,7 @@ import dao.AnswerDAO;
 import dao.BoardDAO;
 import dao.Employee;
 import dao.EmployeeDAO;
+import dao.LogDAO;
 import dao.QuestionDAO;
 import dao.TaskDAO;
 import java.io.IOException;
@@ -191,10 +192,6 @@ public class DashboardController implements Initializable {
     private HBox answerTableOptions;
     @FXML
     private Button viewAnswerButton;
-    @FXML
-    private Button upvoteButton;
-    @FXML
-    private Button downvoteButton;
     
     
     
@@ -327,6 +324,16 @@ public class DashboardController implements Initializable {
     private DatePicker deadline1;
     @FXML
     private Button saveEditTaskButton;
+    @FXML
+    private AnchorPane viewAnswerAnchorPane;
+    @FXML
+    private TextArea answerTextArea;
+    @FXML
+    private Button upvoteAnswerButton;
+    @FXML
+    private Button downvoteAnswerButton;
+    @FXML
+    private Label answerIDLabel;
     
     /**
      * Initializes the controller class.
@@ -698,39 +705,60 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void viewAnswer(ActionEvent event) {
-        selectedQuestionsList = questionTableView.getSelectionModel().getSelectedItems();
-        System.out.println(selectedQuestionsList.get(0).getQuestonID());
+        ObservableList<Answer> selectedAnswersList = FXCollections.observableArrayList();
+        selectedAnswersList = answerTableView.getSelectionModel().getSelectedItems();
+        String selectedAnswerIDText = "" + selectedAnswersList.get(0).getAnswerID();
+        String ans = selectedAnswersList.get(0).getAnswer();
+        answerTextArea.setText(ans);
+        answerIDLabel.setText(selectedAnswerIDText);
+        viewAnswerAnchorPane.toFront();
+        viewAnswerAnchorPane.setVisible(true);
     }
+    
+    
+    
+    
+    /****
+     * 
+     * All log_id above 1000 represent upvote or downvote events 
+     *  
+     ****/
 
     @FXML
     private void upvote(ActionEvent event) {
-        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
-        selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
-        int selectedAnswerID = selectedAnswerList.get(0).getAnswerID();
+        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();        
+        int selectedAnswerID = Integer.parseInt(answerIDLabel.getText());
         AnswerDAO adao = new AnswerDAO();
         adao.connect();
         int upvotes = adao.getUpVotes(selectedAnswerID);
         upvotes++;
         adao.updateUpVotes(selectedAnswerID, upvotes);
         adao.closeConnection();
-//        Answer.loadAnswerTable();
-//        answerTableAnchorPane.toFront();
-//        answerTableAnchorPane.setVisible(true);
+        String answer = "Upvoted " +answerTextArea.getText();
+        String deadline = "27 NOV 2018";
+        LogDAO ldao = new LogDAO();
+        ldao.connect();
+        ldao.updateLog(ldao.logCount()+1000, answer, deadline);
+        ldao.closeConnection();
         
         
     }
 
     @FXML
     private void downvote(ActionEvent event) {
-        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
-        selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
-        int selectedAnswerID = selectedAnswerList.get(0).getAnswerID();
+        int selectedAnswerID = Integer.parseInt(answerIDLabel.getText());
         AnswerDAO adao = new AnswerDAO();
         adao.connect();
         int downvotes = adao.getDownVotes(selectedAnswerID);
         downvotes--;
         adao.updateDownVotes(selectedAnswerID, downvotes);
         adao.closeConnection();
+        String answer = "Downvoted " +answerTextArea.getText();
+        String deadline = "27 NOV 2018";
+        LogDAO ldao = new LogDAO();
+        ldao.connect();
+        ldao.updateLog(ldao.logCount()+1000, answer, deadline);
+        ldao.closeConnection();
         
     }
     

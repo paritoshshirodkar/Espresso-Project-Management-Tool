@@ -63,7 +63,7 @@ public class LogDAO {
     }
     
     
-    // method to update the log
+    // method to update the log for any changes in task
     public void updateLog(int task_id, String task_name, String deadline){
         
         String q = "INSERT INTO log VALUES (?,?,?,?);";
@@ -71,21 +71,21 @@ public class LogDAO {
             
             PreparedStatement pst = connection.prepareStatement(q);
             pst.setInt(1, logCount()+1);
-            System.out.println("Log count " + logCount()+1);
             pst.setInt(2,task_id);
             String msg = task_name + " updated";
             //pst.setString(3,"log generated");
             pst.setString(3, msg);
             pst.setString(4,deadline);
-            System.out.println(q);
             pst.execute();
-            System.out.println("cp4");
+            pst.close();
+            
             //System.out.println(rows2 + " no. of log generated");
         }catch(SQLException ex){
-            System.out.println("SQLException in updateLog()");
+            System.out.println("SQLException in updateLog(int task_id, String task_name, String deadline)");
             
         }
     
     }
+    
     
 }
