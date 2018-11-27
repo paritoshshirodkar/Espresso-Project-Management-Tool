@@ -291,6 +291,42 @@ public class DashboardController implements Initializable {
     private Button postQuestionButton1;
     @FXML
     private Button cancelButton1;
+    @FXML
+    private Button editTaskButton;
+    @FXML
+    private AnchorPane editTaskPane;
+    @FXML
+    private TextField taskIDField1;
+    @FXML
+    private TextField boardNameField1;
+    @FXML
+    private TextField taskNameField1;
+    @FXML
+    private TextField employeeNameField1;
+    @FXML
+    private TextField weightageField1;
+    @FXML
+    private SplitMenuButton status1;
+    @FXML
+    private MenuItem startedMenuItem1;
+    @FXML
+    private MenuItem workingMenuItem1;
+    @FXML
+    private MenuItem stuckMenuItem1;
+    @FXML
+    private MenuItem halfwayMenuItem1;
+    @FXML
+    private MenuItem doneMenuItem1;
+    @FXML
+    private MenuItem highMenuItem1;
+    @FXML
+    private MenuItem mediumMenuItem1;
+    @FXML
+    private MenuItem lowMenuItem1;
+    @FXML
+    private DatePicker deadline1;
+    @FXML
+    private Button saveEditTaskButton;
     
     /**
      * Initializes the controller class.
@@ -668,6 +704,17 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void upvote(ActionEvent event) {
+        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
+        selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
+        int selectedAnswerID = selectedAnswerList.get(0).getAnswerID();
+        AnswerDAO adao = new AnswerDAO();
+        System.out.println("cp1");
+        int upvotes = adao.getUpVotes(selectedAnswerID);
+        System.out.println("cp3");
+        upvotes++;
+        adao.updateUpVotes(selectedAnswerID, upvotes);
+        adao.closeConnection();
+ 
     }
 
     @FXML
@@ -834,47 +881,58 @@ public class DashboardController implements Initializable {
     }
 
     // variables to store status and priority id
-    int statusID, priorityID; 
+    int statusID, priorityID;
+    
+    // variables to store status and priority id after editing the task
+    int statusID1, priorityID1; 
     
     
     @FXML
     private void startedSelected(ActionEvent event) {
         statusID = 1;
+        statusID1 = 1;
     }
 
     @FXML
     private void woiSelected(ActionEvent event) {
         statusID = 2;
+        statusID1 = 2;
     }
 
     @FXML
     private void stuckSelected(ActionEvent event) {
         statusID = 3;
+        statusID1 = 3;
     }
 
     @FXML
     private void halfwayPointSelected(ActionEvent event) {
         statusID = 4;
+        statusID1 = 4;
     }
 
     @FXML
     private void doneSelected(ActionEvent event) {
         statusID = 5;
+        statusID1 = 5;
     }
 
     @FXML
     private void highSelected(ActionEvent event) {
         priorityID = 1;
+        priorityID1 = 1;
     }
 
     @FXML
     private void mediumSelected(ActionEvent event) {
         priorityID = 2;
+        priorityID1 = 2;
     }
 
     @FXML
     private void lowSelected(ActionEvent event) {
         priorityID = 3;
+        priorityID1 = 3;
     }
 
     @FXML
@@ -919,6 +977,21 @@ public class DashboardController implements Initializable {
         answerTableAnchorPane.toFront();
         answerTableAnchorPane.setVisible(true);
         
+    }
+
+    @FXML
+    private void editTask(ActionEvent event) {
+        editTaskPane.toFront();
+        editTaskPane.setVisible(true);
+    }
+
+    @FXML
+    private void saveEditTask(ActionEvent event) {
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        String dateString = "27 NOV 2018";
+        tdao.updateTask(Integer.parseInt(taskIDField1.getText()), boardNameField1.getText(), taskNameField1.getText(), employeeNameField1.getText(), statusID1, 1, priorityID1, Integer.parseInt(weightageField1.getText()), dateString);
+        tdao.closeConnection();
     }
     
 

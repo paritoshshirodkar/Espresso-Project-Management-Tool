@@ -54,10 +54,12 @@ public class Answer {
     public int getUpvotes() {
         return upvotes.get();
     }
+    
 
     public int getDownvotes() {
         return downvotes.get();
     }
+  
     
     
     // method to load the data into the table from the database

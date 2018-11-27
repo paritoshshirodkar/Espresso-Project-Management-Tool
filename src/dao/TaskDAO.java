@@ -74,6 +74,64 @@ public class TaskDAO {
     }
         
         
+    // method to update Task
+        
+    public void updateTask(int task_id, String board_name, String task_name, String employee_first_name, int status_id, int changed, int priority_id, int weightage, String deadline){
+        int rows=0;
+//        String query = "UPDATE `task` SET `task_id`=" + task_id + 
+//                ",`board_name`=" + board_name + 
+//                ",`task_name`=" + task_name + 
+//                ",`employee_first_name`=" + employee_first_name + 
+//                ",`status_id`=" + status_id +
+//                ",`changed`=" + 1 +
+//                ",`priority_id`=" + priority_id +
+//                ",`weightage`=" + weightage + 
+//                ",`deadline`=" + deadline +  
+//                "WHERE task_id=" + task_id + ";";
+           String query = "UPDATE `task` SET `board_name`= ?,`task_name`= ?,`employee_first_name`= ?,`status_id`= ?,`changed`= ?,`priority_id`= ?,`weightage`= ?,`deadline`= ? WHERE `task_id`= ? ;";
+        
+        System.out.println(query);
+        try{
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, board_name);
+            pst.setString(2, task_name);
+            pst.setString(3, employee_first_name);
+            pst.setInt(4, status_id);
+            pst.setInt(5, changed);
+            pst.setInt(6, priority_id);
+            pst.setInt(7, weightage);
+            pst.setString(8, deadline);
+            pst.setInt(9, task_id);
+           
+            rows = pst.executeUpdate();
+            pst.close();
+            System.out.println(rows + " no. of row/s affected. Task updated successfully");
+            
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText("Task updated successfully");
+            alert.showAndWait();
+            LogDAO ldao = new LogDAO();
+            ldao.connect();
+            ldao.updateLog(task_id,task_name,deadline);
+            ldao.closeConnection();
+        } catch(SQLException ex){
+            System.out.println("SQLException in updateTask()");
+        }   
+     
+    }
+    
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        
     // method returns Task names
     public ArrayList<String> getTaskNames(String boardName){
         
