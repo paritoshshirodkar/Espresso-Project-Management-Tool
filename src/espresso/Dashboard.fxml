@@ -17,13 +17,15 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Region?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="dashboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="562.0" prefWidth="699.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.DashboardController">
+<AnchorPane fx:id="dashboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.DashboardController">
    <children>
       <HBox maxHeight="50.0" prefWidth="800.0" style="-fx-background-color: #33FFBD;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -57,7 +59,7 @@
       </HBox>
       <HBox layoutX="1.0" layoutY="40.0" prefHeight="562.0" prefWidth="699.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="40.0">
          <children>
-            <VBox prefWidth="150.0" style="-fx-background-color: #4FC3F7;">
+            <VBox prefWidth="160.0" style="-fx-background-color: #4FC3F7;">
                <children>
                   <Region maxHeight="47.0" prefHeight="47.0" prefWidth="150.0" VBox.vgrow="ALWAYS" />
                   <Button fx:id="inboxButton" mnemonicParsing="false" onAction="#handleSidePanelButtonClick" prefHeight="78.0" prefWidth="150.0" stylesheets="@AddBoard.css" text="Inbox">
@@ -86,13 +88,13 @@
                      </font></Button>
                </children>
             </VBox>
-            <AnchorPane fx:id="mainAnchorPane" prefHeight="560.0" prefWidth="650.0">
+            <AnchorPane fx:id="mainAnchorPane" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #6D4C41;">
                <children>
-                  <AnchorPane fx:id="inboxAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="inboxAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="678.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="566.0" prefWidth="1050.0" AnchorPane.bottomAnchor="-6.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TableView fx:id="logTableView" prefHeight="550.0" prefWidth="678.0">
+                              <TableView fx:id="logTableView" prefHeight="501.0" prefWidth="1050.0">
                                 <columns>
                                   <TableColumn fx:id="logIDColumn" prefWidth="75.0" text="Log ID" />
                                   <TableColumn fx:id="taskIDColumn" prefWidth="75.0" text="Task ID" />
@@ -103,19 +105,22 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="58.0" prefWidth="1050.0">
                                  <children>
-                                    <Button fx:id="logSeenButton" mnemonicParsing="false" onAction="#logSeen" prefHeight="63.0" prefWidth="678.0" stylesheets="@AddBoard.css" text="Seen">
+                                    <Button fx:id="logSeenButton" mnemonicParsing="false" onAction="#logSeen" prefHeight="53.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Seen">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" />
+                                       </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="addBoardPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="addBoardPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="307.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -144,51 +149,24 @@
                                     <Label fx:id="projectLeadValidationLabel" text="Label" visible="false" />
                                  </children>
                               </AnchorPane>
-                              <Button fx:id="createBoardButton" mnemonicParsing="false" onAction="#createBoard" prefHeight="46.0" prefWidth="600.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Create Board">
+                              <Button fx:id="createBoardButton" mnemonicParsing="false" onAction="#createBoard" prefHeight="46.0" prefWidth="1050.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Create Board">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
                                  </VBox.margin>
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
                               </Button>
                            </children>
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="boardsAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                     <children>
-                        <TableView fx:id="boardTableView" prefHeight="760.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="boardIDColumn" prefWidth="75.0" text="Board ID" />
-                              <TableColumn fx:id="boardNameColumn" prefWidth="75.0" text="Board Name" />
-                              <TableColumn fx:id="projectLeadColumn" prefWidth="75.0" text="Project Lead" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                        <HBox fx:id="boardOptions" layoutY="512.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="512.0">
-                           <children>
-                              <Button fx:id="deleteBoardButton" layoutX="192.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteBoard" prefHeight="47.0" prefWidth="237.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Delete Board">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Button>
-                              <Button fx:id="viewTaskButton" mnemonicParsing="false" onAction="#viewTask" prefHeight="47.0" prefWidth="214.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="View Tasks">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Button>
-                              <Button fx:id="createTaskButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#createNewTask" prefHeight="47.0" prefWidth="227.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Create new Task">
-                                 <font>
-                                    <Font size="18.0" />
-                                 </font></Button>
-                           </children>
-                        </HBox>
-                     </children>
-                  </AnchorPane>
-                  <AnchorPane fx:id="myTaskAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
-                  <AnchorPane id="AnchorPane" fx:id="questionTableAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="myTaskAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                  <AnchorPane id="AnchorPane" fx:id="questionTableAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TableView fx:id="questionTableView" prefHeight="530.0">
+                              <TableView fx:id="questionTableView" prefHeight="476.0" prefWidth="1050.0">
                                  <columns>
                                     <TableColumn fx:id="questionIDColumn" prefWidth="75.0" text="Question ID" />
                                     <TableColumn fx:id="questionColumn" prefWidth="75.0" text="Question" />
@@ -200,18 +178,38 @@
                               </TableView>
                               <HBox fx:id="questionOptions" prefHeight="68.0" prefWidth="650.0">
                                  <children>
-                                    <Button fx:id="postQuestionButton" mnemonicParsing="false" onAction="#postQuestion" prefHeight="50.0" prefWidth="198.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Post Question" />
-                                    <Button fx:id="lookAtAnswersButton" mnemonicParsing="false" onAction="#showAnswers" prefHeight="50.0" prefWidth="209.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Look at Answers" />
-                                    <Button fx:id="answerButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#answer" prefHeight="50.0" prefWidth="245.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Answer" />
+                                    <Button fx:id="postQuestionButton" mnemonicParsing="false" onAction="#postQuestion" prefHeight="50.0" prefWidth="198.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Post Question">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin></Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="lookAtAnswersButton" mnemonicParsing="false" onAction="#showAnswers" prefHeight="47.0" prefWidth="249.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Look at Answers">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin></Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="answerButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#answer" prefHeight="50.0" prefWidth="245.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Answer">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                       </HBox.margin></Button>
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="analysisAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="analysisAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox maxHeight="560.0" minHeight="560.0" prefHeight="500.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Region prefHeight="182.0" prefWidth="650.0" />
                               <TextField fx:id="analysisBoardNameTextField" alignment="CENTER" prefHeight="61.0" prefWidth="650.0" promptText="Board Name" VBox.vgrow="ALWAYS">
@@ -222,8 +220,8 @@
                                     <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
                               </TextField>
-                              <Region prefHeight="120.0" prefWidth="650.0" />
-                              <HBox prefHeight="49.0" prefWidth="650.0">
+                              <Region prefHeight="170.0" prefWidth="1050.0" />
+                              <HBox prefHeight="91.0" prefWidth="1050.0">
                                  <children>
                                     <Button fx:id="barChartButton" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Bar Chart">
                                        <font>
@@ -233,7 +231,8 @@
                                           <Insets right="10.0" />
                                        </HBox.margin>
                                     </Button>
-                                    <Button fx:id="pieChartButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Pie Chart">
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="pieChartButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="194.0" stylesheets="@AddBoard.css" text="Pie Chart">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -244,6 +243,7 @@
                                           <Insets right="10.0" />
                                        </HBox.margin>
                                     </Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
                                     <Button fx:id="lineChartButton" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Line Chart">
                                        <font>
                                           <Font size="18.0" />
@@ -257,9 +257,9 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="taskAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="taskAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="560.0" prefWidth="1050.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TableView fx:id="taskTableView" prefHeight="541.0" prefWidth="650.0">
                                  <columns>
@@ -278,7 +278,7 @@
                               </TableView>
                               <HBox prefHeight="100.0" prefWidth="200.0">
                                  <children>
-                                    <Button fx:id="editTaskButton" mnemonicParsing="false" onAction="#editTask" prefHeight="59.0" prefWidth="717.0" stylesheets="@AddBoard.css" text="Edit Task">
+                                    <Button fx:id="editTaskButton" mnemonicParsing="false" onAction="#editTask" prefHeight="59.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Edit Task">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -295,7 +295,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="postQuestionAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="postQuestionAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -321,12 +321,12 @@
                                     <Font size="15.0" />
                                  </font>
                               </TextArea>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="100.0" prefWidth="1050.0">
                                  <padding>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
                                  </padding>
                                  <children>
-                                    <Button fx:id="postButton" mnemonicParsing="false" onAction="#saveQuestion" prefHeight="55.0" prefWidth="300.0" text="Post" textFill="WHITE">
+                                    <Button fx:id="postButton" mnemonicParsing="false" onAction="#saveQuestion" prefHeight="55.0" prefWidth="430.0" text="Post" textFill="WHITE">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -335,7 +335,8 @@
                                           <URL value="@AddBoard.css" />
                                        </stylesheets>
                                     </Button>
-                                    <Button fx:id="cancelButton" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelQuestion" prefHeight="55.0" prefWidth="300.0" style="-fx-background-color: #e53935;" text="Cancel" textFill="WHITE">
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="cancelButton" layoutX="20.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelQuestion" prefHeight="55.0" prefWidth="396.0" style="-fx-background-color: #e53935;" text="Cancel" textFill="WHITE">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -346,9 +347,9 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="answerTableAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="answerTableAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="560.0" prefWidth="1050.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TableView fx:id="answerTableView" prefHeight="554.0" prefWidth="650.0">
                                  <columns>
@@ -364,16 +365,22 @@
                               </TableView>
                               <HBox fx:id="answerTableOptions" prefHeight="98.0" prefWidth="650.0">
                                  <children>
-                                    <Button fx:id="viewAnswerButton" mnemonicParsing="false" onAction="#viewAnswer" prefHeight="55.0" prefWidth="678.0" stylesheets="@AddBoard.css" text="View Answer" />
+                                    <Button fx:id="viewAnswerButton" mnemonicParsing="false" onAction="#viewAnswer" prefHeight="55.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="View Answer">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin></Button>
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="barChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="barChartAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="650.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="560.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane id="AnchorPane" prefHeight="498.0" prefWidth="650.0">
                                  <children>
@@ -387,9 +394,9 @@
                                     </BarChart>
                                  </children>
                               </AnchorPane>
-                              <HBox prefHeight="66.0" prefWidth="650.0">
+                              <HBox prefHeight="66.0" prefWidth="1050.0">
                                  <children>
-                                    <Button fx:id="backButtonBarChart" mnemonicParsing="false" onAction="#goToAnalysis" prefHeight="63.0" prefWidth="650.0" stylesheets="@AddBoard.css" text="Back">
+                                    <Button fx:id="backButtonBarChart" mnemonicParsing="false" onAction="#goToAnalysis" prefHeight="63.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Back">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -399,14 +406,14 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane fx:id="pieChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="pieChartAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="650.4">
+                        <VBox prefHeight="560.0" prefWidth="1050.0">
                            <children>
                               <PieChart fx:id="pieChart" prefHeight="527.0" prefWidth="650.0" title="Task distribution in Board" />
-                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <HBox prefHeight="100.0" prefWidth="1050.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="backButtonPieChart" mnemonicParsing="false" onAction="#goToAnalysis" prefHeight="65.0" prefWidth="650.0" stylesheets="@AddBoard.css" text="Back">
+                                    <Button fx:id="backButtonPieChart" mnemonicParsing="false" onAction="#goToAnalysis" prefHeight="65.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Back">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
@@ -416,9 +423,9 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane fx:id="lineChartAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="lineChartAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="650.4">
+                        <VBox prefHeight="560.0" prefWidth="1050.0">
                            <children>
                               <LineChart fx:id="LineChart" prefHeight="530.0" prefWidth="650.0">
                                 <xAxis>
@@ -428,21 +435,24 @@
                                   <NumberAxis fx:id="y" label="Weightage in %" side="LEFT" />
                                 </yAxis>
                               </LineChart>
-                              <HBox prefHeight="100.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                              <HBox prefHeight="100.0" prefWidth="1050.0" VBox.vgrow="ALWAYS">
                                  <children>
-                                    <Button fx:id="backButtonLineChart" mnemonicParsing="false" onAction="#goToAnalysis" prefHeight="65.0" prefWidth="650.0" stylesheets="@AddBoard.css" text="Back">
+                                    <Button fx:id="backButtonLineChart" mnemonicParsing="false" onAction="#goToAnalysis" prefHeight="65.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Back">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="createTaskPane" prefHeight="560.0" prefWidth="678.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="createTaskPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="494.0" prefWidth="678.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="560.0" prefWidth="1050.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <TextField fx:id="taskIDField" alignment="CENTER" promptText="Task ID">
                                  <opaqueInsets>
@@ -504,6 +514,7 @@
                                           <Insets left="60.0" />
                                        </HBox.margin>
                                     </SplitMenuButton>
+                                    <Region prefHeight="132.0" prefWidth="156.0" />
                                     <SplitMenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Priority">
                                        <items>
                                           <MenuItem fx:id="highMenuItem" mnemonicParsing="false" onAction="#highSelected" text="High" />
@@ -514,6 +525,7 @@
                                           <Insets left="150.0" />
                                        </HBox.margin>
                                     </SplitMenuButton>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
                                     <DatePicker fx:id="deadline" promptText="Deadline">
                                        <HBox.margin>
                                           <Insets left="100.0" />
@@ -523,8 +535,11 @@
                                  <padding>
                                     <Insets left="10.0" right="10.0" top="20.0" />
                                  </padding>
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin>
                               </HBox>
-                              <Button fx:id="saveTask" mnemonicParsing="false" onAction="#saveTask" prefHeight="57.0" prefWidth="678.0" stylesheets="@AddBoard.css" text="Save Task">
+                              <Button fx:id="saveTask" mnemonicParsing="false" onAction="#saveTask" prefHeight="57.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Save Task">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
                                  </VBox.margin>
@@ -536,7 +551,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="addAnswerAnchorPane" prefHeight="560.0" prefWidth="650.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="addAnswerAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -562,7 +577,11 @@
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets />
+                                       </HBox.margin>
                                     </Button>
+                                    <Region prefHeight="72.0" prefWidth="403.0" />
                                     <Button fx:id="cancelButton1" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#cancelAnswer" prefHeight="55.0" prefWidth="323.0" style="-fx-background-color: #e53935;" stylesheets="@AddBoard.css" text="Cancel" textFill="WHITE">
                                        <font>
                                           <Font size="18.0" />
@@ -577,7 +596,7 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="editTaskPane" prefHeight="560.0" prefWidth="678.4" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false">
+                  <AnchorPane id="AnchorPane" fx:id="editTaskPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false">
                      <children>
                         <VBox prefHeight="494.0" prefWidth="678.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
@@ -641,6 +660,7 @@
                                           <Insets left="60.0" />
                                        </HBox.margin>
                                     </SplitMenuButton>
+                                    <Region prefHeight="138.0" prefWidth="150.0" />
                                     <SplitMenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Priority">
                                        <items>
                                           <MenuItem fx:id="highMenuItem1" mnemonicParsing="false" onAction="#highSelected" text="High" />
@@ -651,6 +671,7 @@
                                           <Insets left="150.0" />
                                        </HBox.margin>
                                     </SplitMenuButton>
+                                    <Region layoutX="208.0" layoutY="30.0" prefHeight="138.0" prefWidth="128.0" />
                                     <DatePicker fx:id="deadline1" promptText="Deadline">
                                        <HBox.margin>
                                           <Insets left="100.0" />
@@ -661,7 +682,7 @@
                                     <Insets left="10.0" right="10.0" top="20.0" />
                                  </padding>
                               </HBox>
-                              <Button fx:id="saveEditTaskButton" mnemonicParsing="false" onAction="#saveEditTask" prefHeight="57.0" prefWidth="678.0" stylesheets="@AddBoard.css" text="Save Task">
+                              <Button fx:id="saveEditTaskButton" mnemonicParsing="false" onAction="#saveEditTask" prefHeight="57.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Save Task">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
                                  </VBox.margin>
@@ -673,9 +694,9 @@
                         </VBox>
                      </children>
                   </AnchorPane>
-                  <AnchorPane fx:id="viewAnswerAnchorPane" prefHeight="560.0" prefWidth="678.4" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane fx:id="viewAnswerAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
-                        <VBox prefHeight="560.0" prefWidth="678.4" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <VBox prefHeight="546.0" prefWidth="1050.0" AnchorPane.bottomAnchor="36.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <Region prefHeight="124.0" prefWidth="678.0" />
                               <Label fx:id="answerIDLabel" text="Label" visible="false" />
@@ -685,17 +706,24 @@
                                  </VBox.margin>
                               </TextArea>
                               <Region prefHeight="157.0" prefWidth="678.0" />
-                              <HBox prefHeight="94.0" prefWidth="678.0">
+                              <HBox prefHeight="94.0" prefWidth="1050.0">
                                  <children>
-                                    <Button fx:id="upvoteAnswerButton" mnemonicParsing="false" onAction="#upvote" prefHeight="69.0" prefWidth="342.0" stylesheets="@AddBoard.css" text="Upvote">
+                                    <Button fx:id="upvoteAnswerButton" mnemonicParsing="false" onAction="#upvote" prefHeight="63.0" prefWidth="411.0" stylesheets="@AddBoard.css" text="Upvote">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets left="10.0" />
+                                       </HBox.margin>
                                     </Button>
-                                    <Button fx:id="downvoteAnswerButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#downvote" prefHeight="69.0" prefWidth="342.0" stylesheets="@AddBoard.css" text="Downvote">
+                                    <Region prefHeight="54.0" prefWidth="286.0" />
+                                    <Button fx:id="downvoteAnswerButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#downvote" prefHeight="54.0" prefWidth="382.0" stylesheets="@AddBoard.css" text="Downvote">
                                        <font>
                                           <Font size="18.0" />
                                        </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
                                     </Button>
                                  </children>
                               </HBox>
@@ -703,6 +731,60 @@
                         </VBox>
                      </children>
                   </AnchorPane>
+                  <AnchorPane fx:id="boardsAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <TableView fx:id="boardTableView" prefHeight="760.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                           <columns>
+                              <TableColumn fx:id="boardIDColumn" prefWidth="75.0" text="Board ID" />
+                              <TableColumn fx:id="boardNameColumn" prefWidth="75.0" text="Board Name" />
+                              <TableColumn fx:id="projectLeadColumn" prefWidth="75.0" text="Project Lead" />
+                           </columns>
+                           <columnResizePolicy>
+                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                           </columnResizePolicy>
+                        </TableView>
+                        <HBox fx:id="boardOptions" layoutY="512.0" prefWidth="1050.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="512.0">
+                           <children>
+                              <Button fx:id="deleteBoardButton" layoutX="192.0" layoutY="10.0" mnemonicParsing="false" onAction="#deleteBoard" prefHeight="0.0" prefWidth="237.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Delete Board">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </HBox.margin></Button>
+                              <Region prefHeight="200.0" prefWidth="158.0" />
+                              <Button fx:id="viewTaskButton" mnemonicParsing="false" onAction="#viewTask" prefHeight="0.0" prefWidth="276.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="View Tasks">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </HBox.margin></Button>
+                              <Region prefHeight="50.0" prefWidth="167.0" />
+                              <Button fx:id="createTaskButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#createNewTask" prefHeight="0.0" prefWidth="227.0" stylesheets="@../../../PMT/src/pmt/AddBoard.css" text="Create new Task">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" />
+                                 </HBox.margin></Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="20.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </AnchorPane>
+                  <ImageView fx:id="imageView" fitHeight="461.0" fitWidth="595.0" layoutX="205.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="121.0" AnchorPane.leftAnchor="205.0" AnchorPane.rightAnchor="250.0" AnchorPane.topAnchor="100.0">
+                     <image>
+                        <Image url="@SXZ.gif" />
+                     </image>
+                  </ImageView>
+                  <Label layoutX="356.0" layoutY="38.0" prefHeight="46.0" prefWidth="341.0" text="Welcome to Espresso!!" textFill="#f2eeee">
+                     <font>
+                        <Font size="30.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
          </children>
