@@ -865,10 +865,10 @@ public class DashboardController implements Initializable {
         
         if (event.getSource() == barChartButton) {
             showBarChart(analysisBoardNameTextField.getText());
-            barChartAnchorPane.toFront();
-            barChartAnchorPane.setVisible(true);
-            pieChartAnchorPane.setVisible(false);
-            lineChartAnchorPane.setVisible(false);
+//            barChartAnchorPane.toFront();
+//            barChartAnchorPane.setVisible(true);
+//            pieChartAnchorPane.setVisible(false);
+//            lineChartAnchorPane.setVisible(false);
             
             
             
@@ -897,38 +897,21 @@ public class DashboardController implements Initializable {
     
     
     // method to display bar chart
-    public void showBarChart(String boardName){
-            
-            // to get the data from database
-            ArrayList<String> taskNameList = new ArrayList<String>();
-            ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
-            TaskDAO tdao = new TaskDAO();
-            tdao.connect();
-            taskNameList = tdao.getTaskNames(boardName);
-            System.out.println(taskNameList);
-            taskWeightageList = tdao.getTaskWeightage(boardName);
-            
-            // for verification purposes
-            for (int i = 0; i < taskNameList.size(); i++) {
-                System.out.println(taskNameList.get(i) + "\t" + taskWeightageList.get(i));
-            }
-            tdao.closeConnection();
-            
-            // to display Bar Chart
+    public void showBarChart(String boardName) {
 
-           XYChart.Series<String, Integer> set = new XYChart.Series<>();
-            
-            for(int i=0; i < taskNameList.size(); i++){
-                String x_axis_values = taskNameList.get(i);
-                System.out.println(x_axis_values);
-                int y_axis_values = taskWeightageList.get(i);
-                System.out.println(y_axis_values);
-                set.getData().add(new XYChart.Data<>(x_axis_values, y_axis_values));
-               
-            }
-            
-            WorkDoneBarChart.getData().add(set);
-   
+        // to get the data from database
+        ArrayList<String> taskNameList = new ArrayList<String>();
+        ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        taskNameList = tdao.getTaskNames(boardName);
+        System.out.println(taskNameList);
+        taskWeightageList = tdao.getTaskWeightage(boardName);
+
+        // displaying Bar Chart
+        BarChartOracle bco = new BarChartOracle(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
+        bco.showChart();
+
     }
     
 
