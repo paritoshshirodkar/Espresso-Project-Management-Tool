@@ -39,7 +39,7 @@
                </HBox.margin>
             </Label>
             <Region prefHeight="44.0" prefWidth="198.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="username" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: transparent;" text="username" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button fx:id="username" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: transparent;" text="username" textFill="WHITE" visible="false" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -295,11 +295,11 @@
                            </children>
                         </VBox>
                      </children></AnchorPane>
-                  <AnchorPane id="AnchorPane" fx:id="taskAnchorPane" prefHeight="560.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                  <AnchorPane id="AnchorPane" fx:id="taskAnchorPane" prefHeight="600.0" prefWidth="1050.0" style="-fx-background-color: #EEEEEE;" stylesheets="@AddBoard.css" visible="false" AnchorPane.bottomAnchor="108.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                      <children>
                         <VBox prefHeight="560.0" prefWidth="1050.0" AnchorPane.bottomAnchor="22.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
-                              <TableView fx:id="taskTableView" prefHeight="541.0" prefWidth="650.0">
+                              <TableView fx:id="taskTableView" prefHeight="499.0" prefWidth="1050.0">
                                  <columns>
                                     <TableColumn fx:id="taskIdColumn" prefWidth="75.0" text="Task ID" />
                                     <TableColumn fx:id="tboardNameColumn" prefWidth="75.0" text="Board Name" />
@@ -314,9 +314,9 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <HBox prefHeight="100.0" prefWidth="200.0">
+                              <HBox prefHeight="88.0" prefWidth="1050.0">
                                  <children>
-                                    <Button fx:id="editTaskButton" mnemonicParsing="false" onAction="#editTask" prefHeight="59.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Edit Task">
+                                    <Button fx:id="editTaskButton" mnemonicParsing="false" onAction="#editTask" prefHeight="71.0" prefWidth="1030.0" stylesheets="@AddBoard.css" text="Edit Task">
                                        <font>
                                           <Font size="18.0" />
                                        </font>

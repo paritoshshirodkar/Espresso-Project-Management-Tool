@@ -10,7 +10,7 @@
    <children>
       <AnchorPane fx:id="ap" layoutX="6.0" prefHeight="509.0" prefWidth="650.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="251.0" layoutY="35.0" text="Sign Up" textFill="WHITE">
+            <Label layoutX="257.0" layoutY="33.0" prefHeight="40.0" prefWidth="98.0" text="Sign Up" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
@@ -30,8 +30,8 @@
                   <Font size="16.0" />
                </font>
             </TextField>
-            <Label fx:id="emailValidationLabel" layoutX="72.0" layoutY="278.0" prefHeight="26.0" prefWidth="486.0" text="Label" visible="false" />
-            <Label fx:id="passwordValidationLabel" layoutX="72.0" layoutY="400.0" prefHeight="18.0" prefWidth="486.0" text="Label" visible="false" />
+            <Label fx:id="emailValidationLabel" layoutX="72.0" layoutY="278.0" prefHeight="26.0" prefWidth="486.0" text="Label" textFill="#4fc3f7" visible="false" />
+            <Label fx:id="passwordValidationLabel" layoutX="72.0" layoutY="400.0" prefHeight="18.0" prefWidth="486.0" text="Label" textFill="#4fc3f7" visible="false" />
             <TextField fx:id="email" alignment="CENTER" layoutX="72.0" layoutY="239.0" prefHeight="38.0" prefWidth="486.0" promptText="Email" stylesheets="@AddBoard.css">
                <font>
                   <Font size="16.0" />
