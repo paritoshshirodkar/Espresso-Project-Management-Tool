@@ -91,6 +91,7 @@ public class FXMLDocumentController implements Initializable {
 
             // else if block entered if username is crroect but password is incorrect.
             if (matched == false) {
+                usernameValidationLabel.setVisible(false);
                 password.clear();
                 pwdValidationLabel.setText("Ïnvalid password. Please re-enter password");
                 pwdValidationLabel.setVisible(true);

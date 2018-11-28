@@ -31,7 +31,6 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
-import javafx.scene.chart.XYChart;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -358,9 +357,9 @@ public class DashboardController implements Initializable {
     @FXML
     private Button areaChartButton;
     @FXML
-    private Button bubbleChartButton;
-    @FXML
     private Button scatterChartButton;
+    @FXML
+    private Button compareMultipleButton;
     
     /**
      * Initializes the controller class.
@@ -884,6 +883,16 @@ public class DashboardController implements Initializable {
         if (event.getSource() == lineChartButton) {
             showLineChart(analysisBoardNameTextField.getText());
         }
+
+        if (event.getSource() == areaChartButton) {
+            showAreaChart(analysisBoardNameTextField.getText());
+        }
+        if (event.getSource() == scatterChartButton) {
+            showScatterChart(analysisBoardNameTextField.getText());
+        }
+        if (event.getSource() == compareMultipleButton) {
+            System.out.println("  ");
+        } 
     }
     
     
@@ -949,17 +958,53 @@ public class DashboardController implements Initializable {
         System.out.println(taskNameList);
         taskWeightageList = tdao.getTaskWeightage(boardName);
 
-        // displaying Bar Chart
+        // displaying Line Chart
         LineChartFX lcfx = new LineChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
-        lcfx.showChart();
-        
-        
-        
+        lcfx.showChart();   
                
     }
     
+    
+    
 
     
+    
+    // method to display area chart
+    public void showAreaChart(String boardName){
+        
+        // to get the data from database
+        ArrayList<String> taskNameList = new ArrayList<String>();
+        ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        taskNameList = tdao.getTaskNames(boardName);
+        System.out.println(taskNameList);
+        taskWeightageList = tdao.getTaskWeightage(boardName);
+
+        // displaying Area Chart
+        AreaChartFX acfx = new AreaChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
+        acfx.showChart();   
+               
+    }
+    
+    
+    // method to display scatter chart
+    public void showScatterChart(String boardName){
+        
+        // to get the data from database
+        ArrayList<String> taskNameList = new ArrayList<String>();
+        ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        taskNameList = tdao.getTaskNames(boardName);
+        System.out.println(taskNameList);
+        taskWeightageList = tdao.getTaskWeightage(boardName);
+
+        // displaying Area Chart
+        ScatterChartFX scfx = new ScatterChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
+        scfx.showChart();   
+               
+    }
     
     
 
@@ -972,10 +1017,12 @@ public class DashboardController implements Initializable {
     // variables to store status and priority id
     int statusID, priorityID;
     
+    // variables to store status and priority id after editing the task    
     // variables to store status and priority id after editing the task
     int statusID1, priorityID1; 
     
     
+   
     @FXML
     private void startedSelected(ActionEvent event) {
         statusID = 1;

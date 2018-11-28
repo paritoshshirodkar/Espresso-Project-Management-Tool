@@ -8,41 +8,41 @@
 
 <AnchorPane id="AnchorPane" fx:id="signupPane" maxHeight="835.0" maxWidth="635.0" minHeight="535.0" minWidth="635.0" prefHeight="505.0" prefWidth="642.0" stylesheets="@AddBoard.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.SignupController">
    <children>
-      <AnchorPane fx:id="ap" layoutX="6.0" prefHeight="509.0" prefWidth="650.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane fx:id="ap" layoutX="6.0" prefHeight="509.0" prefWidth="650.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
-            <Label layoutX="251.0" layoutY="35.0" text="Sign Up" textFill="#03a9f4">
+            <Label layoutX="251.0" layoutY="35.0" text="Sign Up" textFill="WHITE">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <TextField fx:id="employeeID" alignment="CENTER" layoutX="72.0" layoutY="86.0" prefHeight="38.0" prefWidth="486.0" promptText="Employee ID">
+            <TextField fx:id="employeeID" alignment="CENTER" layoutX="72.0" layoutY="86.0" prefHeight="38.0" prefWidth="486.0" promptText="Employee ID" stylesheets="@AddBoard.css">
                 <font>
                     <Font size="16.0" />
                 </font>
             </TextField>
-            <TextField fx:id="firstName" alignment="TOP_CENTER" layoutX="72.0" layoutY="140.0" prefHeight="38.0" prefWidth="486.0" promptText="First Name">
+            <TextField fx:id="firstName" alignment="TOP_CENTER" layoutX="72.0" layoutY="140.0" prefHeight="38.0" prefWidth="486.0" promptText="First Name" stylesheets="@AddBoard.css">
                 <font>
                     <Font size="16.0" />
                 </font>
             </TextField>
-            <TextField fx:id="lastName" alignment="CENTER" layoutX="72.0" layoutY="192.0" prefHeight="26.0" prefWidth="486.0" promptText="Last Name">
+            <TextField fx:id="lastName" alignment="CENTER" layoutX="72.0" layoutY="192.0" prefHeight="26.0" prefWidth="486.0" promptText="Last Name" stylesheets="@AddBoard.css">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
             <Label fx:id="emailValidationLabel" layoutX="72.0" layoutY="278.0" prefHeight="26.0" prefWidth="486.0" text="Label" visible="false" />
             <Label fx:id="passwordValidationLabel" layoutX="72.0" layoutY="400.0" prefHeight="18.0" prefWidth="486.0" text="Label" visible="false" />
-            <TextField fx:id="email" alignment="CENTER" layoutX="72.0" layoutY="239.0" prefHeight="38.0" prefWidth="486.0" promptText="Email">
+            <TextField fx:id="email" alignment="CENTER" layoutX="72.0" layoutY="239.0" prefHeight="38.0" prefWidth="486.0" promptText="Email" stylesheets="@AddBoard.css">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="password" alignment="CENTER" layoutX="72.0" layoutY="305.0" prefHeight="38.0" prefWidth="486.0" promptText="Password">
+            <TextField fx:id="password" alignment="CENTER" layoutX="72.0" layoutY="305.0" prefHeight="38.0" prefWidth="486.0" promptText="Password" stylesheets="@AddBoard.css">
                <font>
                   <Font size="16.0" />
                </font>
             </TextField>
-            <TextField fx:id="confirmPassword" alignment="CENTER" layoutX="72.0" layoutY="353.0" prefHeight="38.0" prefWidth="486.0" promptText="Confirm Password">
+            <TextField fx:id="confirmPassword" alignment="CENTER" layoutX="72.0" layoutY="353.0" prefHeight="38.0" prefWidth="486.0" promptText="Confirm Password" stylesheets="@AddBoard.css">
                <font>
                   <Font size="16.0" />
                </font>

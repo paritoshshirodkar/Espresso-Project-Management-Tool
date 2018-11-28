@@ -27,7 +27,7 @@
 
 <AnchorPane fx:id="dashboardPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="600.0" minWidth="800.0" prefHeight="600.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.DashboardController">
    <children>
-      <HBox maxHeight="50.0" prefWidth="800.0" style="-fx-background-color: #33FFBD;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <HBox maxHeight="50.0" prefWidth="800.0" style="-fx-background-color: #FFC107;" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Region prefHeight="44.0" prefWidth="373.0" HBox.hgrow="ALWAYS" />
             <Label alignment="CENTER" contentDisplay="CENTER" text="Espresso" textFill="WHITE">
@@ -225,8 +225,8 @@
                                     <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
                               </TextField>
-                              <Region prefHeight="170.0" prefWidth="1050.0" />
-                              <HBox prefHeight="91.0" prefWidth="1050.0">
+                              <Region prefHeight="131.0" prefWidth="1050.0" />
+                              <HBox prefHeight="51.0" prefWidth="1030.0">
                                  <children>
                                     <Button fx:id="barChartButton" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Bar Chart">
                                        <font>
@@ -257,6 +257,39 @@
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="20.0" layoutY="385.0" prefHeight="51.0" prefWidth="1030.0">
+                                 <children>
+                                    <Button fx:id="areaChartButton" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Area Chart">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="scatterChartButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="194.0" stylesheets="@AddBoard.css" text="Scatter Chart">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="compareMultipleButton" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Compare Multiple" visible="false">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="40.0" />
                                  </VBox.margin>
                               </HBox>
                            </children>
@@ -505,7 +538,7 @@
                                     <Insets left="10.0" right="10.0" top="20.0" />
                                  </VBox.margin>
                               </TextField>
-                              <HBox prefHeight="162.0" prefWidth="650.0">
+                              <HBox prefHeight="114.0" prefWidth="1050.0">
                                  <children>
                                     <SplitMenuButton fx:id="status" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="Status">
                                        <items>
@@ -544,7 +577,7 @@
                                     <Insets bottom="10.0" />
                                  </VBox.margin>
                               </HBox>
-                              <Button fx:id="saveTask" mnemonicParsing="false" onAction="#saveTask" prefHeight="57.0" prefWidth="1050.0" stylesheets="@AddBoard.css" text="Save Task">
+                              <Button fx:id="saveTask" mnemonicParsing="false" onAction="#saveTask" prefHeight="57.0" prefWidth="1030.0" stylesheets="@AddBoard.css" text="Save Task">
                                  <VBox.margin>
                                     <Insets bottom="10.0" left="10.0" right="10.0" />
                                  </VBox.margin>
@@ -651,7 +684,7 @@
                                     <Insets left="10.0" right="10.0" top="20.0" />
                                  </VBox.margin>
                               </TextField>
-                              <HBox prefHeight="162.0" prefWidth="650.0">
+                              <HBox prefHeight="138.0" prefWidth="1050.0">
                                  <children>
                                     <SplitMenuButton fx:id="status1" mnemonicParsing="false" prefHeight="26.0" prefWidth="128.0" text="Status">
                                        <items>
