@@ -7,21 +7,27 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" fx:id="signinPane" prefHeight="374.0" prefWidth="481.0" stylesheets="@AddBoard.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.FXMLDocumentController">
+<AnchorPane id="AnchorPane" fx:id="signinPane" prefHeight="600.0" prefWidth="1050.0" stylesheets="@AddBoard.css" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="espresso.FXMLDocumentController">
    <children>
-      <AnchorPane prefHeight="374.0" prefWidth="481.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane layoutX="288.0" layoutY="146.0" prefHeight="311.0" prefWidth="474.0" AnchorPane.bottomAnchor="203.0" AnchorPane.leftAnchor="288.0" AnchorPane.rightAnchor="288.0" AnchorPane.topAnchor="146.0">
          <children>
-            <Label layoutX="197.0" layoutY="40.0" text="Sign In" textFill="#03a9f4">
+            <Label layoutX="214.0" layoutY="14.0" text="Sign In" textFill="#03a9f4">
                <font>
                   <Font size="28.0" />
                </font>
             </Label>
-            <TextField fx:id="username" alignment="CENTER" layoutX="119.0" layoutY="104.0" prefHeight="26.0" prefWidth="241.0" promptText="Username" />
-            <PasswordField fx:id="password" alignment="CENTER" layoutX="118.0" layoutY="174.0" prefHeight="26.0" prefWidth="242.0" promptText="Password" />
-            <Button fx:id="signInButton" layoutX="118.0" layoutY="285.0" mnemonicParsing="false" onAction="#signIn" prefHeight="26.0" prefWidth="113.0" stylesheets="@AddBoard.css" text="Sign In" />
-            <Button fx:id="registerButton" layoutX="246.0" layoutY="285.0" mnemonicParsing="false" onAction="#register" prefHeight="26.0" prefWidth="114.0" stylesheets="@AddBoard.css" text="Sign Up" />
-            <Label fx:id="pwdValidationLabel" layoutX="119.0" layoutY="225.0" prefHeight="18.0" prefWidth="242.0" text="Label" visible="false" />
-            <Label fx:id="usernameValidationLabel" layoutX="118.0" layoutY="149.0" prefHeight="18.0" prefWidth="242.0" text="Label" visible="false" />
+            <TextField fx:id="username" alignment="CENTER" layoutX="93.0" layoutY="73.0" prefHeight="40.0" prefWidth="320.0" promptText="Username" />
+            <PasswordField fx:id="password" alignment="CENTER" layoutX="93.0" layoutY="156.0" prefHeight="40.0" prefWidth="320.0" promptText="Password" />
+            <Button fx:id="signInButton" layoutX="93.0" layoutY="259.0" mnemonicParsing="false" onAction="#signIn" prefHeight="40.0" prefWidth="147.0" stylesheets="@AddBoard.css" text="Sign In">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Button fx:id="registerButton" layoutX="269.0" layoutY="258.0" mnemonicParsing="false" onAction="#register" prefHeight="42.0" prefWidth="139.0" stylesheets="@AddBoard.css" text="Sign Up">
+               <font>
+                  <Font size="15.0" />
+               </font></Button>
+            <Label fx:id="pwdValidationLabel" layoutX="93.0" layoutY="203.0" prefHeight="40.0" prefWidth="320.0" text="Label" visible="false" />
+            <Label fx:id="usernameValidationLabel" layoutX="97.0" layoutY="113.0" prefHeight="40.0" prefWidth="320.0" text="Label" visible="false" AnchorPane.bottomAnchor="158.0" AnchorPane.topAnchor="113.0" />
          </children>
       </AnchorPane>
    </children>

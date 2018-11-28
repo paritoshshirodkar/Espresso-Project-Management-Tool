@@ -90,6 +90,26 @@ public class EmployeeDAO {
     }
     
     
+    // method returns Employee object for Sign In purposes
+    public Employee getEmployeeSignIn(String username){
+        String getEmployeeQuery = "select * from employee where email='" + username + "'";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(getEmployeeQuery);
+            rs.next();
+            Employee employee = new Employee(rs.getInt("employee_id"), rs.getString("employee_first_name"), rs.getString("employee_last_name"), rs.getString("email"), rs.getString("password"));
+            rs.close();
+            return employee;
+        } catch (SQLException ex) {
+            Employee employeeSignIn = new Employee(0, "null", "null", "null", "null");
+            return employeeSignIn;
+        }
+        //return null;       
+    }
+    
+    
+    
+    
     
 }
     

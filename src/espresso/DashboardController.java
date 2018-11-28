@@ -42,6 +42,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -350,6 +351,10 @@ public class DashboardController implements Initializable {
     private TableColumn<Log, String> timestampColumn;
     @FXML
     private Button logSeenButton;
+    @FXML
+    private Button logoutButton;
+    @FXML
+    private ImageView imageView;
     
     /**
      * Initializes the controller class.
@@ -678,6 +683,13 @@ public class DashboardController implements Initializable {
             analysisAnchorPane.toFront();
             analysisAnchorPane.setVisible(true);
         }
+        if (event.getSource() == logoutButton) {
+            dashboardPane.setVisible(false);
+            Stage stage = (Stage) dashboardPane.getScene().getWindow();
+            stage.close();
+            loadWindow("FXMLDocument.fxml", "Sign In");
+        }
+        
 
     }
 
