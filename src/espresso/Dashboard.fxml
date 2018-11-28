@@ -39,7 +39,7 @@
                </HBox.margin>
             </Label>
             <Region prefHeight="44.0" prefWidth="198.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="username" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: transparent;" text="username" textFill="WHITE" HBox.hgrow="ALWAYS">
+            <Button fx:id="username" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: transparent;" text="username" textFill="WHITE" visible="false" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
