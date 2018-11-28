@@ -225,8 +225,8 @@
                                     <Insets left="10.0" right="10.0" />
                                  </VBox.margin>
                               </TextField>
-                              <Region prefHeight="170.0" prefWidth="1050.0" />
-                              <HBox prefHeight="91.0" prefWidth="1050.0">
+                              <Region prefHeight="131.0" prefWidth="1050.0" />
+                              <HBox prefHeight="51.0" prefWidth="1030.0">
                                  <children>
                                     <Button fx:id="barChartButton" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Bar Chart">
                                        <font>
@@ -257,6 +257,39 @@
                                  </children>
                                  <VBox.margin>
                                     <Insets left="10.0" right="10.0" />
+                                 </VBox.margin>
+                              </HBox>
+                              <HBox layoutX="20.0" layoutY="385.0" prefHeight="51.0" prefWidth="1030.0">
+                                 <children>
+                                    <Button fx:id="areaChartButton" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Area Chart">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="bubbleChartButton" layoutX="10.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="194.0" stylesheets="@AddBoard.css" text="Bubble Chart">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <padding>
+                                          <Insets right="10.0" />
+                                       </padding>
+                                       <HBox.margin>
+                                          <Insets right="10.0" />
+                                       </HBox.margin>
+                                    </Button>
+                                    <Region prefHeight="200.0" prefWidth="200.0" />
+                                    <Button fx:id="scatterChartButton" layoutX="240.0" layoutY="10.0" mnemonicParsing="false" onAction="#handleChartButtonClick" prefHeight="50.0" prefWidth="230.0" stylesheets="@AddBoard.css" text="Scatter Chart">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                    </Button>
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets left="10.0" right="10.0" top="40.0" />
                                  </VBox.margin>
                               </HBox>
                            </children>

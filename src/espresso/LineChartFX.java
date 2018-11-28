@@ -5,18 +5,19 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
+import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.stage.Stage;
  
-public class BarChartOracle {
+public class LineChartFX {
     
     ArrayList<String> xValues;
     ArrayList<Integer> yValues;
     String xAxisLabel;
     String yAxisLabel;
     String boardName;
-    public BarChartOracle(ArrayList<String> xValues, ArrayList<Integer> yValues, String xAxisLabel, String yAxisLabel, String boardName){
+    public LineChartFX(ArrayList<String> xValues, ArrayList<Integer> yValues, String xAxisLabel, String yAxisLabel, String boardName){
         this.xValues = xValues;
         this.yValues = yValues;
         this.xAxisLabel = xAxisLabel;
@@ -29,10 +30,10 @@ public class BarChartOracle {
         Stage st = new Stage();
         final CategoryAxis xAxis = new CategoryAxis();
         final NumberAxis yAxis = new NumberAxis();
-        final BarChart<String,Number> bc = new BarChart<>(xAxis,yAxis);
+        final LineChart<String,Number> lc = new LineChart<>(xAxis,yAxis);
         
         
-        bc.setTitle(boardName);
+        lc.setTitle(boardName);
         
         xAxis.setLabel(xAxisLabel);       
         yAxis.setLabel(yAxisLabel);
@@ -45,8 +46,8 @@ public class BarChartOracle {
             series1.getData().add(new XYChart.Data(xValues.get(i), yValues.get(i)));
         }
         
-        Scene scene  = new Scene(bc,800,600);
-        bc.getData().add(series1);
+        Scene scene  = new Scene(lc,800,600);
+        lc.getData().add(series1);
         st.setScene(scene);
         st.show();
         

@@ -355,6 +355,12 @@ public class DashboardController implements Initializable {
     private Button logoutButton;
     @FXML
     private ImageView imageView;
+    @FXML
+    private Button areaChartButton;
+    @FXML
+    private Button bubbleChartButton;
+    @FXML
+    private Button scatterChartButton;
     
     /**
      * Initializes the controller class.
@@ -865,15 +871,6 @@ public class DashboardController implements Initializable {
         
         if (event.getSource() == barChartButton) {
             showBarChart(analysisBoardNameTextField.getText());
-//            barChartAnchorPane.toFront();
-//            barChartAnchorPane.setVisible(true);
-//            pieChartAnchorPane.setVisible(false);
-//            lineChartAnchorPane.setVisible(false);
-            
-            
-            
-          
-           
 
         }
         if (event.getSource() == pieChartButton) {
@@ -886,12 +883,6 @@ public class DashboardController implements Initializable {
         }
         if (event.getSource() == lineChartButton) {
             showLineChart(analysisBoardNameTextField.getText());
-            lineChartAnchorPane.toFront();
-            barChartAnchorPane.setVisible(false);
-            pieChartAnchorPane.setVisible(false);
-            lineChartAnchorPane.setVisible(true);
-            
-
         }
     }
     
@@ -909,8 +900,8 @@ public class DashboardController implements Initializable {
         taskWeightageList = tdao.getTaskWeightage(boardName);
 
         // displaying Bar Chart
-        BarChartOracle bco = new BarChartOracle(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
-        bco.showChart();
+        BarChartFX bcfx = new BarChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
+        bcfx.showChart();
 
     }
     
@@ -947,23 +938,6 @@ public class DashboardController implements Initializable {
     
     
     // method to display line chart
-    public void showLineChart(){
-        XYChart.Series series = new XYChart.Series(); //Make a new XYChart object
-        //Add Data
-            series.getData().add(new XYChart.Data("1", 23));
-            series.getData().add(new XYChart.Data("2", 14));
-            series.getData().add(new XYChart.Data("3", 15));
-            
-        XYChart.Series series2 = new XYChart.Series(); //Make a new XYChart object
-        //Add Data
-            series2.getData().add(new XYChart.Data("1", 50));
-            series2.getData().add(new XYChart.Data("2", 60));
-            series2.getData().add(new XYChart.Data("3", 90));
-             LineChart.getData().addAll(series, series2); 
-               
-    }
-    
-    // method to display line chart
     public void showLineChart(String boardName){
         
         // to get the data from database
@@ -974,21 +948,17 @@ public class DashboardController implements Initializable {
         taskNameList = tdao.getTaskNames(boardName);
         System.out.println(taskNameList);
         taskWeightageList = tdao.getTaskWeightage(boardName);
+
+        // displaying Bar Chart
+        LineChartFX lcfx = new LineChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
+        lcfx.showChart();
         
         
         
-        XYChart.Series series = new XYChart.Series(); //Make a new XYChart object
-        //Add Data
-        for(int i=0; i<taskNameList.size(); i++){
-            String x_axis_values = taskNameList.get(i);
-            int y_axis_values = taskWeightageList.get(i);
-            series.getData().add(new XYChart.Data(x_axis_values, y_axis_values));
-            
-        }
-      
-        LineChart.getData().addAll(series); 
                
     }
+    
+
     
     
     
