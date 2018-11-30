@@ -14,7 +14,13 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.ResourceBundle;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
@@ -1083,11 +1089,22 @@ public class DashboardController implements Initializable {
 //        DateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
 //        String dateString = dateFormat.format(localDate);
 //        System.out.println(dateString);
+        
+        // converting  LocalDate to Date
+        LocalDate localDate = deadline1.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date deadlineDate = Date.from(instant);
+        
+        // converting Date to String
+        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+        String strdeadlineDate = dateFormat.format(deadlineDate);
+        System.out.println(strdeadlineDate);
+        
         String dateString = "27 NOV 2018";
         TaskDAO tdao = new TaskDAO();
         tdao.connect();
         try {
-            tdao.addTask(Integer.parseInt(taskIDField.getText()), boardNameField.getText(), taskNameField.getText(), employeeNameField.getText(), statusID, changed, priorityID, Integer.parseInt(weightageField.getText()), dateString);
+            tdao.addTask(Integer.parseInt(taskIDField.getText()), boardNameField.getText(), taskNameField.getText(), employeeNameField.getText(), statusID, changed, priorityID, Integer.parseInt(weightageField.getText()), strdeadlineDate);
         } catch (IOException ex) {
             System.out.println("Exception because of date.");
         }
@@ -1125,8 +1142,18 @@ public class DashboardController implements Initializable {
     private void saveEditTask(ActionEvent event) {
         TaskDAO tdao = new TaskDAO();
         tdao.connect();
+        // converting  LocalDate to Date
+        LocalDate localDate = deadline1.getValue();
+        Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
+        Date deadlineDate = Date.from(instant);
+        
+        // converting Date to String
+        DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
+        String strdeadlineDate = dateFormat.format(deadlineDate);
+        System.out.println(strdeadlineDate);
+        
         String dateString = "27 NOV 2018";
-        tdao.updateTask(Integer.parseInt(taskIDField1.getText()), boardNameField1.getText(), taskNameField1.getText(), employeeNameField1.getText(), statusID1, 1, priorityID1, Integer.parseInt(weightageField1.getText()), dateString);
+        tdao.updateTask(Integer.parseInt(taskIDField1.getText()), boardNameField1.getText(), taskNameField1.getText(), employeeNameField1.getText(), statusID1, 1, priorityID1, Integer.parseInt(weightageField1.getText()), strdeadlineDate);
         tdao.closeConnection();
     }
 
