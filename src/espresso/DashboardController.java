@@ -7,6 +7,7 @@ import dao.EmployeeDAO;
 import dao.LogDAO;
 import dao.QuestionDAO;
 import dao.TaskDAO;
+import dao.Task;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -366,6 +367,8 @@ public class DashboardController implements Initializable {
     private Button scatterChartButton;
     @FXML
     private Button compareMultipleButton;
+    @FXML
+    private SplitMenuButton priority1;
     
     /**
      * Initializes the controller class.
@@ -1134,8 +1137,48 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void editTask(ActionEvent event) {
+        ObservableList<Task> selectedTaskList = FXCollections.observableArrayList();
+        selectedTaskList = taskTableView.getSelectionModel().getSelectedItems();
+        String selectedTaskName = selectedTaskList.get(0).getTaskName();
+        TaskDAO tdao = new TaskDAO();
+        tdao.connect();
+        dao.Task t = tdao.getTask(selectedTaskName);
+        
+        // code to set the existing values in the editTaskPanel
         editTaskPane.toFront();
+        taskIDField1.setText("" + t.getTaskID());
+        boardNameField1.setText(t.getBoardName());
+        taskNameField1.setText(t.getTaskName());
+        employeeNameField1.setText(t.getEmployeeFirstName());
+        weightageField1.setText(("" + t.getWeightage()));
+        
+        switch(t.getStatusID()){
+            case 1: startedSelected(new ActionEvent());
+                    break;
+            case 2: woiSelected(new ActionEvent());
+                    break;
+            case 3: stuckSelected(new ActionEvent());
+                    break;
+            case 4: halfwayPointSelected(new ActionEvent());
+                    break;
+                    
+            case 5: doneSelected(new ActionEvent());
+                    break;
+ 
+        }
+        
+        switch(t.getPriorityID()){
+            case 1: highSelected(new ActionEvent());
+                    break;
+            case 2: mediumSelected(new ActionEvent());
+                    break;
+            case 3: lowSelected(new ActionEvent());
+                    break;
+        }
+        
+        
         editTaskPane.setVisible(true);
+        tdao.closeConnection();
     }
 
     @FXML
@@ -1152,9 +1195,12 @@ public class DashboardController implements Initializable {
         String strdeadlineDate = dateFormat.format(deadlineDate);
         System.out.println(strdeadlineDate);
         
-        String dateString = "27 NOV 2018";
+       
         tdao.updateTask(Integer.parseInt(taskIDField1.getText()), boardNameField1.getText(), taskNameField1.getText(), employeeNameField1.getText(), statusID1, 1, priorityID1, Integer.parseInt(weightageField1.getText()), strdeadlineDate);
         tdao.closeConnection();
+        loadDataBoards();
+        boardsAnchorPane.toFront();
+        boardsAnchorPane.setVisible(true);
     }
 
     

@@ -78,19 +78,14 @@ public class TaskDAO {
         
     public void updateTask(int task_id, String board_name, String task_name, String employee_first_name, int status_id, int changed, int priority_id, int weightage, String deadline){
         int rows=0;
-//        String query = "UPDATE `task` SET `task_id`=" + task_id + 
-//                ",`board_name`=" + board_name + 
-//                ",`task_name`=" + task_name + 
-//                ",`employee_first_name`=" + employee_first_name + 
-//                ",`status_id`=" + status_id +
-//                ",`changed`=" + 1 +
-//                ",`priority_id`=" + priority_id +
-//                ",`weightage`=" + weightage + 
-//                ",`deadline`=" + deadline +  
-//                "WHERE task_id=" + task_id + ";";
            String query = "UPDATE `task` SET `board_name`= ?,`task_name`= ?,`employee_first_name`= ?,`status_id`= ?,`changed`= ?,`priority_id`= ?,`weightage`= ?,`deadline`= ? WHERE `task_id`= ? ;";
         
-        System.out.println(query);
+       
+        System.out.println(status_id);
+        
+        System.out.println(priority_id);
+        
+           
         try{
             PreparedStatement pst = connection.prepareStatement(query);
             pst.setString(1, board_name);
@@ -192,6 +187,22 @@ public class TaskDAO {
             System.out.println("SQLException in taskCount()");
         }
         return count;
+    }
+    
+    // method returns Task object
+    public Task getTask(String taskName){
+        String getTaskQuery = "select * from task where task_name='" + taskName + "'";
+        try {
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(getTaskQuery);
+            rs.next();
+            Task task = new Task(rs.getInt("task_id"), rs.getString("board_name"), rs.getString("task_name"), rs.getString("employee_first_name"), rs.getInt("status_id"), rs.getInt("changed"), rs.getInt("priority_id"), rs.getInt("weightage"), rs.getString("deadline"));
+            rs.close();
+            return task;
+        } catch (SQLException ex) {
+            System.out.println("SQLException in getTask(String taskName)");
+        }
+        return null;       
     }
     
     

@@ -699,7 +699,7 @@
                                        </HBox.margin>
                                     </SplitMenuButton>
                                     <Region prefHeight="138.0" prefWidth="150.0" />
-                                    <SplitMenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Priority">
+                                    <SplitMenuButton fx:id="priority1" mnemonicParsing="false" prefHeight="26.0" prefWidth="156.0" text="Priority">
                                        <items>
                                           <MenuItem fx:id="highMenuItem1" mnemonicParsing="false" onAction="#highSelected" text="High" />
                                           <MenuItem fx:id="mediumMenuItem1" mnemonicParsing="false" onAction="#mediumSelected" text="Medium" />
