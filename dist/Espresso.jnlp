@@ -8,7 +8,7 @@
   </information>
   <resources>
     <j2se version="1.6+" href="http://java.sun.com/products/autodl/j2se"/>
-    <jar href="Espresso.jar" size="2917109" download="eager" />
+    <jar href="Espresso.jar" size="2917195" download="eager" />
     <jar href="lib\jfoenix-8.0.7.jar" size="2631271" download="eager" />
     <jar href="lib\mysql.jar" size="493105" download="eager" />
   </resources>

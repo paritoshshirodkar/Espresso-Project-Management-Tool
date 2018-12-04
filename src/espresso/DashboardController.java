@@ -778,12 +778,12 @@ public class DashboardController implements Initializable {
 
     @FXML
     private void answer(ActionEvent event) {
-//        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
-//        selectedAnswerList = answerTableView.getSelectionModel().getSelectedItems();
-//        int selectedAnswerID = selectedAnswerList.get(0).getqID();
-//        String answerIDText = "" + selectedAnswerID;
-//        questionIDTextField.setText(answerIDText);
+        ObservableList<Question> selectedQuestionList = FXCollections.observableArrayList();
+        selectedQuestionList = questionTableView.getSelectionModel().getSelectedItems();
+        int selectedQuestionID = selectedQuestionList.get(0).getQuestonID();
+        String selectedQID = "" + selectedQuestionID;
         addAnswerAnchorPane.toFront();
+        questionIDTextField.setText(selectedQID);
         addAnswerAnchorPane.setVisible(true);
         
     }
