@@ -12,6 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -38,6 +39,7 @@ import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.PieChart;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
@@ -105,12 +107,9 @@ public class DashboardController implements Initializable {
     private TableColumn<Board, Integer> projectLeadColumn;
 
     @FXML
-    private Button inboxButton;
-    @FXML
     private Button analysisButton;
     @FXML
     private AnchorPane mainAnchorPane;
-    @FXML
     private AnchorPane inboxAnchorPane;
     @FXML
     private AnchorPane addBoardPane;
@@ -369,6 +368,32 @@ public class DashboardController implements Initializable {
     private Button compareMultipleButton;
     @FXML
     private SplitMenuButton priority1;
+    @FXML
+    private Button logsButton;
+    @FXML
+    private AnchorPane logsAnchorPane;
+    @FXML
+    private Button messagesButton;
+    @FXML
+    private AnchorPane messagesAnchorPane;
+    @FXML
+    private TableView<Message> messageTableView;
+    @FXML
+    private TableColumn<Message, Integer> messageIDColumn;
+    @FXML
+    private TableColumn<Message, String> senderEmailColumn;
+    @FXML
+    private TableColumn<Message, String> messageColumn1;
+    @FXML
+    private AnchorPane postMessageAnchorPane;
+    @FXML
+    private TextField receiverEmailTextField;
+    @FXML
+    private TextArea postMessageTextArea;
+    @FXML
+    private Button postMessageButton;
+    @FXML
+    private Button writeMessageButton;
     
     /**
      * Initializes the controller class.
@@ -415,7 +440,14 @@ public class DashboardController implements Initializable {
         messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
     }
-
+    
+    private void initMessageColumns() {
+        messageIDColumn.setCellValueFactory(new PropertyValueFactory<>("messageID"));
+        senderEmailColumn.setCellValueFactory(new PropertyValueFactory<>("senderEmail"));
+        messageColumn1.setCellValueFactory(new PropertyValueFactory<>("message"));
+        
+    }
+    
     private void initTaskColumns() {
         taskIdColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
         tboardNameColumn.setCellValueFactory(new PropertyValueFactory<>("boardName"));
@@ -535,7 +567,6 @@ public class DashboardController implements Initializable {
                 String message = rs.getString("message");
                 String timestamp = rs.getString("timestamp");
 
-                // adding the Board to the boardList
                 logList.add(new Log(logID, taskID, message, timestamp));
 
             }
@@ -555,6 +586,51 @@ public class DashboardController implements Initializable {
     }
     
     
+    
+    // method to load the data into the table from the database
+    public void loadDataMessage(String username) {
+
+        // List to store the Message 
+        ObservableList<Message> messageList = FXCollections.observableArrayList();
+
+        try {
+            Connection connection = null;
+            try {
+                Class.forName("com.mysql.jdbc.Driver");
+            } catch (ClassNotFoundException ex) {
+                System.out.println("ClassNotFoundException in loadDataMessage(String username)");
+            }
+            try {
+                connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
+            } catch (SQLException ex) {
+                System.out.println("SQLException in  loadDataMessage(String username) while loading driver");
+            }
+            String query = "SELECT * FROM message WHERE receiver_email='" + username + "';";
+            Statement st = connection.createStatement();
+            ResultSet rs = st.executeQuery(query);
+            while (rs.next()) {
+                int messageID = rs.getInt("message_id");
+                String senderEmail = rs.getString("sender_email");
+                String message = rs.getString("message");
+                
+                messageList.add(new Message(messageID, senderEmail, message));
+                
+            }
+            
+            try {
+                connection.close();
+            } catch (SQLException ex) {
+                System.out.println("SQLException in loadDataMessage(String username) while closing connection");
+            }
+        } catch (SQLException ex) {
+            System.out.println("SQLException in loadDataMessage(String username)");
+        }
+        
+        messageTableView.getItems().setAll(messageList);
+        System.out.println("Message list for user " + username + " displayed");
+        
+
+    }
     
     
     
@@ -664,12 +740,19 @@ public class DashboardController implements Initializable {
     // method to decide which AnchorPane is to be loaded
     @FXML
     private void handleSidePanelButtonClick(ActionEvent event) {
-        if (event.getSource() == inboxButton) {
+        if (event.getSource() == logsButton) {
             loadDataLogs();
-            inboxAnchorPane.toFront();
-            inboxAnchorPane.setVisible(true);
+            logsAnchorPane.toFront();
+            logsAnchorPane.setVisible(true);
 
         }
+        if (event.getSource() == messagesButton) {
+            initMessageColumns();
+            loadDataMessage("a@b.com");
+            messagesAnchorPane.toFront();
+            messagesAnchorPane.setVisible(true);
+        }
+        
         if (event.getSource() == createABoardButton) {
             addBoardPane.toFront();
             addBoardPane.setVisible(true);
@@ -1203,6 +1286,44 @@ public class DashboardController implements Initializable {
         boardsAnchorPane.setVisible(true);
     }
 
+
+    @FXML
+    private void sendMessage(ActionEvent event) {
+        try{
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
+            String query = "INSERT INTO message (sender_email, receiver_email, message) values (?,?,?);";
+            PreparedStatement pst = connection.prepareStatement(query);
+            pst.setString(1, "a@b.com");
+            pst.setString(2, receiverEmailTextField.getText());
+            pst.setString(3, postMessageTextArea.getText());
+            int rows = pst.executeUpdate();
+            pst.close();
+            
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setHeaderText(null);
+            alert.setContentText(rows+" no. of messages sent successfully");
+            alert.showAndWait();
+            connection.close();
+        } catch(Exception ex){
+            System.out.println("Exception in sendMessage()");
+        }
+        
+        
+        
+    }
+
+    @FXML
+    private void cancel(ActionEvent event) {
+        messagesAnchorPane.toFront();
+        messagesAnchorPane.setVisible(true);
+    }
+
+    @FXML
+    private void writeMessage(ActionEvent event) {
+        postMessageAnchorPane.toFront();
+        postMessageAnchorPane.setVisible(true);
+    }
+
     
 
     public static class Board {
@@ -1233,7 +1354,7 @@ public class DashboardController implements Initializable {
     
     
     
-        public static class Log {
+    public static class Log {
 
         private final SimpleIntegerProperty logID;
         private final SimpleIntegerProperty taskID;
@@ -1267,7 +1388,39 @@ public class DashboardController implements Initializable {
 
     }
     
-  
+    
+    public static class Message {
+
+        private final SimpleIntegerProperty messageID;
+        private final SimpleStringProperty senderEmail;
+        private final SimpleStringProperty message;
+        
+
+        public Message(int messageID, String senderEmail, String message) {
+            this.messageID = new SimpleIntegerProperty(messageID);
+            this.senderEmail = new SimpleStringProperty(senderEmail);
+            this.message = new SimpleStringProperty(message);
+        }
+
+        public int getMessageID() {
+            return messageID.get();
+        }
+        
+        public String getSenderEmail() {
+            return senderEmail.get();
+        }
+
+        public String getMessage() {
+            return message.get();
+        }
+        
+    }
+
+
+
+    
+        
+        
     
 
     // creating class Task
