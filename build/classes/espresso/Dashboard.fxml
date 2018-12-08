@@ -12,6 +12,7 @@
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.SplitMenuButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -39,7 +40,7 @@
                </HBox.margin>
             </Label>
             <Region prefHeight="44.0" prefWidth="198.0" HBox.hgrow="ALWAYS" />
-            <Button fx:id="username" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: transparent;" text="username" textFill="WHITE" visible="false" HBox.hgrow="ALWAYS">
+            <Button fx:id="username" alignment="CENTER" maxWidth="140.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="102.0" style="-fx-background-color: transparent;" text="username" textFill="WHITE" HBox.hgrow="ALWAYS">
                <HBox.margin>
                   <Insets left="5.0" right="5.0" top="5.0" />
                </HBox.margin>
@@ -914,5 +915,52 @@
             </AnchorPane>
          </children>
       </HBox>
+      <AnchorPane fx:id="signinPane" prefHeight="600.0" prefWidth="1200.0" style="-fx-background-color: #000000;" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane layoutX="683.0" layoutY="128.0" prefHeight="299.0" prefWidth="429.0">
+               <children>
+                  <Label layoutX="214.0" layoutY="14.0" text="Sign In" textFill="WHITE">
+                     <font>
+                        <Font size="28.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameTextField" alignment="CENTER" layoutX="93.0" layoutY="73.0" prefHeight="40.0" prefWidth="320.0" promptText="Username" />
+                  <PasswordField fx:id="passwordTextField" alignment="CENTER" layoutX="93.0" layoutY="156.0" prefHeight="40.0" prefWidth="320.0" promptText="Password" />
+                  <Button fx:id="signInButton" layoutX="93.0" layoutY="259.0" mnemonicParsing="false" onAction="#signIn" prefHeight="40.0" prefWidth="320.0" stylesheets="@AddBoard.css" text="Sign In">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </Button>
+                  <Label fx:id="pwdValidationLabel" layoutX="93.0" layoutY="203.0" prefHeight="40.0" prefWidth="320.0" text="Label" textFill="#4fc3f7" visible="false" />
+                  <Label fx:id="usernameValidationLabel" layoutX="97.0" layoutY="113.0" prefHeight="40.0" prefWidth="320.0" text="Label" textFill="#4fc3f7" visible="false" AnchorPane.bottomAnchor="158.0" AnchorPane.topAnchor="113.0" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutX="46.0" layoutY="158.0" prefHeight="283.0" prefWidth="394.0" style="-fx-background-color: #2196F3;">
+               <children>
+                  <Label layoutX="46.0" layoutY="90.0" text="Welcome to Espresso" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="32.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="56.0" layoutY="142.0" text="Project Management Tool" textFill="WHITE">
+                     <font>
+                        <Font name="Calibri" size="21.0" />
+                     </font>
+                  </Label>
+                  <Button fx:id="signUpButton" layoutX="26.0" layoutY="229.0" mnemonicParsing="false" onAction="#signUp" prefHeight="40.0" prefWidth="320.0" stylesheets="@AddBoard.css" text="Sign Up">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="10.0" />
+                     </padding>
+                  </Button>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

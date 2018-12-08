@@ -10,6 +10,8 @@ import dao.TaskDAO;
 import dao.Task;
 import java.io.IOException;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -24,6 +26,8 @@ import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -44,6 +48,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.SplitMenuButton;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -145,7 +150,7 @@ public class DashboardController implements Initializable {
     private Button answerButton;
     @FXML
     private AnchorPane analysisAnchorPane;
-    
+
     @FXML
     private AnchorPane taskAnchorPane;
     @FXML
@@ -196,9 +201,7 @@ public class DashboardController implements Initializable {
     private HBox answerTableOptions;
     @FXML
     private Button viewAnswerButton;
-    
-    
-    
+
     // List to store all the boards 
     ObservableList<Board> boardList = FXCollections.observableArrayList();
 
@@ -210,19 +213,13 @@ public class DashboardController implements Initializable {
 
     // List to store all the selected Questions
     ObservableList<Question> selectedQuestionsList = FXCollections.observableArrayList();
-    
+
     // List to store all the Logs 
     ObservableList<Log> logList = FXCollections.observableArrayList();
 
     // List to store all the selected Logs
     ObservableList<Log> selectedLogList = FXCollections.observableArrayList();
-    
 
-    
-    
-    
-    
-    
     @FXML
     private TextField analysisBoardNameTextField;
     private Button barCharButton;
@@ -395,6 +392,21 @@ public class DashboardController implements Initializable {
     @FXML
     private Button writeMessageButton;
     
+    @FXML
+    private Button signInButton;
+    @FXML
+    private Label pwdValidationLabel;
+    @FXML
+    private Label usernameValidationLabel;
+    @FXML
+    private Button signUpButton;
+    @FXML
+    private AnchorPane signinPane;
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private PasswordField passwordTextField;
+
     /**
      * Initializes the controller class.
      */
@@ -416,15 +428,10 @@ public class DashboardController implements Initializable {
 //        pieChartAnchorPane.setVisible(false);
 //        lineChartAnchorPane.setVisible(false);
 
-
-
         //method to initiate columns
-        
-        username.setText("apt@apt.com");
+        username.setText(usernameTextField.getText());
         initColumns();
         initLogColumns();
-        
-        
 
     }
 
@@ -433,21 +440,21 @@ public class DashboardController implements Initializable {
         boardNameColumn.setCellValueFactory(new PropertyValueFactory<>("boardName"));
         projectLeadColumn.setCellValueFactory(new PropertyValueFactory<>("projectLead"));
     }
-    
+
     private void initLogColumns() {
         logIDColumn.setCellValueFactory(new PropertyValueFactory<>("logID"));
         taskIDColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
         messageColumn.setCellValueFactory(new PropertyValueFactory<>("message"));
         timestampColumn.setCellValueFactory(new PropertyValueFactory<>("timestamp"));
     }
-    
+
     private void initMessageColumns() {
         messageIDColumn.setCellValueFactory(new PropertyValueFactory<>("messageID"));
         senderEmailColumn.setCellValueFactory(new PropertyValueFactory<>("senderEmail"));
         messageColumn1.setCellValueFactory(new PropertyValueFactory<>("message"));
-        
+
     }
-    
+
     private void initTaskColumns() {
         taskIdColumn.setCellValueFactory(new PropertyValueFactory<>("taskID"));
         tboardNameColumn.setCellValueFactory(new PropertyValueFactory<>("boardName"));
@@ -466,21 +473,21 @@ public class DashboardController implements Initializable {
 
         questionTableView.getItems().setAll(Question.loadQuestionTable());
         questionOptions.setVisible(true);
-        
+
     }
-    
-    private void initAnswerTableColumn(int selectedQID){
+
+    private void initAnswerTableColumn(int selectedQID) {
         answerIDColumn.setCellValueFactory(new PropertyValueFactory<>("answerID"));
         //aquestionIDColumn.setCellValueFactory(new PropertyValueFactory<>("qID"));
         answerColumn.setCellValueFactory(new PropertyValueFactory<>("answer"));
         employeeIDColumn.setCellValueFactory(new PropertyValueFactory<>("employeeID"));
         upvotesColumn.setCellValueFactory(new PropertyValueFactory<>("upvotes"));
         downvotesColumn.setCellValueFactory(new PropertyValueFactory<>("downvotes"));
-        
+
         answerTableView.getItems().setAll(Answer.loadAnswerTable(selectedQID));
         answerTableOptions.setVisible(true);
         System.out.println("Answer options displayed");
-        
+
     }
 
     private void boardNameBox(ActionEvent event) {
@@ -536,10 +543,7 @@ public class DashboardController implements Initializable {
         System.out.println("Board options displayed");
 
     }
-    
-    
-    
-    
+
     // method to load the data into the table from the database
     public void loadDataLogs() {
 
@@ -581,12 +585,9 @@ public class DashboardController implements Initializable {
 
         logTableView.getItems().setAll(logList);
         System.out.println("Log list displayed");
-        
 
     }
-    
-    
-    
+
     // method to load the data into the table from the database
     public void loadDataMessage(String username) {
 
@@ -612,11 +613,11 @@ public class DashboardController implements Initializable {
                 int messageID = rs.getInt("message_id");
                 String senderEmail = rs.getString("sender_email");
                 String message = rs.getString("message");
-                
+
                 messageList.add(new Message(messageID, senderEmail, message));
-                
+
             }
-            
+
             try {
                 connection.close();
             } catch (SQLException ex) {
@@ -625,15 +626,11 @@ public class DashboardController implements Initializable {
         } catch (SQLException ex) {
             System.out.println("SQLException in loadDataMessage(String username)");
         }
-        
+
         messageTableView.getItems().setAll(messageList);
         System.out.println("Message list for user " + username + " displayed");
-        
 
     }
-    
-    
-    
 
     // method to load the data into the table from the database
     public void loadDataTasks() {
@@ -682,8 +679,7 @@ public class DashboardController implements Initializable {
         System.out.println("Task list displayed");
 
     }
-    
-    
+
     // method to load the data into the table from the database for the given board name
     public void loadDataTasks(String bN) {
 
@@ -702,7 +698,7 @@ public class DashboardController implements Initializable {
             } catch (SQLException ex) {
                 System.out.println("SQLException in  loadDataTasks(String boardName) while loading driver");
             }
-            String taskListQuery = "SELECT * FROM task WHERE board_name='" + bN +"';";
+            String taskListQuery = "SELECT * FROM task WHERE board_name='" + bN + "';";
             Statement st = connection.createStatement();
             ResultSet rs = st.executeQuery(taskListQuery);
             while (rs.next()) {
@@ -732,11 +728,6 @@ public class DashboardController implements Initializable {
 
     }
 
-    
-    
-    
-    
-
     // method to decide which AnchorPane is to be loaded
     @FXML
     private void handleSidePanelButtonClick(ActionEvent event) {
@@ -748,11 +739,11 @@ public class DashboardController implements Initializable {
         }
         if (event.getSource() == messagesButton) {
             initMessageColumns();
-            loadDataMessage("a@b.com");
+            loadDataMessage(usernameTextField.getText());
             messagesAnchorPane.toFront();
             messagesAnchorPane.setVisible(true);
         }
-        
+
         if (event.getSource() == createABoardButton) {
             addBoardPane.toFront();
             addBoardPane.setVisible(true);
@@ -781,12 +772,17 @@ public class DashboardController implements Initializable {
             analysisAnchorPane.setVisible(true);
         }
         if (event.getSource() == logoutButton) {
-            dashboardPane.setVisible(false);
-            Stage stage = (Stage) dashboardPane.getScene().getWindow();
-            stage.close();
-            loadWindow("FXMLDocument.fxml", "Sign In");
+            //dashboardPane.setVisible(false);
+            usernameTextField.clear();
+            usernameValidationLabel.setVisible(false);
+            passwordTextField.clear();
+            pwdValidationLabel.setVisible(false);
+            signinPane.toFront();
+            signinPane.setVisible(true);
+//            Stage stage = (Stage) dashboardPane.getScene().getWindow();
+//            stage.close();
+//            loadWindow("FXMLDocument.fxml", "Sign In");
         }
-        
 
     }
 
@@ -842,7 +838,7 @@ public class DashboardController implements Initializable {
         selectedQuestionsList = questionTableView.getSelectionModel().getSelectedItems();
         int selectedQID = selectedQuestionsList.get(0).getQuestonID();
         System.out.println(selectedQID);
-        
+
         AnswerDAO adao = new AnswerDAO();
         adao.connect();
         System.out.println(adao.answerCount(selectedQID));
@@ -859,7 +855,6 @@ public class DashboardController implements Initializable {
 //        test = Answer.loadAnswerTable(selectedQID);
 //        System.out.println(test);
 //        System.out.println("cp");
-
     }
 
     @FXML
@@ -871,7 +866,7 @@ public class DashboardController implements Initializable {
         addAnswerAnchorPane.toFront();
         questionIDTextField.setText(selectedQID);
         addAnswerAnchorPane.setVisible(true);
-        
+
     }
 
     @FXML
@@ -904,19 +899,17 @@ public class DashboardController implements Initializable {
         viewAnswerAnchorPane.toFront();
         viewAnswerAnchorPane.setVisible(true);
     }
-    
-    
-    
-    
-    /****
-     * 
-     * All log_id above 1000 represent upvote or downvote events 
-     *  
-     ****/
 
+    /**
+     * **
+     *
+     * All log_id above 1000 represent upvote or downvote events
+     *
+     ***
+     */
     @FXML
     private void upvote(ActionEvent event) {
-        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();        
+        ObservableList<Answer> selectedAnswerList = FXCollections.observableArrayList();
         int selectedAnswerID = Integer.parseInt(answerIDLabel.getText());
         AnswerDAO adao = new AnswerDAO();
         adao.connect();
@@ -924,15 +917,14 @@ public class DashboardController implements Initializable {
         upvotes++;
         adao.updateUpVotes(selectedAnswerID, upvotes);
         adao.closeConnection();
-        String answer = "Upvoted " +answerTextArea.getText();
+        String answer = "Upvoted " + answerTextArea.getText();
         String deadline = "27 NOV 2018";
         LogDAO ldao = new LogDAO();
         ldao.connect();
-        ldao.updateLog(ldao.highestlogID()+1000, answer, deadline);
-        ldao.updateUserLog(ldao.highestUserlogID()+1000, answer, deadline);
+        ldao.updateLog(ldao.highestlogID() + 1000, answer, deadline);
+        ldao.updateUserLog(ldao.highestUserlogID() + 1000, answer, deadline);
         ldao.closeConnection();
-        
-        
+
     }
 
     @FXML
@@ -944,22 +936,20 @@ public class DashboardController implements Initializable {
         downvotes--;
         adao.updateDownVotes(selectedAnswerID, downvotes);
         adao.closeConnection();
-        String answer = "Downvoted " +answerTextArea.getText();
+        String answer = "Downvoted " + answerTextArea.getText();
         String deadline = "27 NOV 2018";
         LogDAO ldao = new LogDAO();
         ldao.connect();
-        ldao.updateLog(ldao.highestlogID()+1000, answer, deadline);
-        ldao.updateUserLog(ldao.highestUserlogID()+1000, answer, deadline);
+        ldao.updateLog(ldao.highestlogID() + 1000, answer, deadline);
+        ldao.updateUserLog(ldao.highestUserlogID() + 1000, answer, deadline);
         ldao.closeConnection();
-        
+
     }
-    
-    
-    
+
     // code to handle the button click events of analysis pane
     @FXML
     private void handleChartButtonClick(ActionEvent event) {
-        
+
         if (event.getSource() == barChartButton) {
             showBarChart(analysisBoardNameTextField.getText());
 
@@ -984,10 +974,9 @@ public class DashboardController implements Initializable {
         }
         if (event.getSource() == compareMultipleButton) {
             System.out.println("  ");
-        } 
+        }
     }
-    
-    
+
     // method to display bar chart
     public void showBarChart(String boardName) {
 
@@ -1005,12 +994,10 @@ public class DashboardController implements Initializable {
         bcfx.showChart();
 
     }
-    
 
-    
-   // method to show pie chart
-    public void showPieChart(String boardName){
-        
+    // method to show pie chart
+    public void showPieChart(String boardName) {
+
         // to get the data from database
         ArrayList<String> taskNameList = new ArrayList<String>();
         ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
@@ -1027,20 +1014,17 @@ public class DashboardController implements Initializable {
         tdao.closeConnection();
 
         // to display Bar Chart
-        
         ObservableList<PieChart.Data> pieChartData = FXCollections.observableArrayList();
         for (int i = 0; i < taskNameList.size(); i++) {
             pieChartData.add(new PieChart.Data(taskNameList.get(i), taskWeightageList.get(i)));
         }
-        
+
         pieChart.setData(pieChartData);
     }
-    
-    
-    
+
     // method to display line chart
-    public void showLineChart(String boardName){
-        
+    public void showLineChart(String boardName) {
+
         // to get the data from database
         ArrayList<String> taskNameList = new ArrayList<String>();
         ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
@@ -1052,18 +1036,13 @@ public class DashboardController implements Initializable {
 
         // displaying Line Chart
         LineChartFX lcfx = new LineChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
-        lcfx.showChart();   
-               
-    }
-    
-    
-    
+        lcfx.showChart();
 
-    
-    
+    }
+
     // method to display area chart
-    public void showAreaChart(String boardName){
-        
+    public void showAreaChart(String boardName) {
+
         // to get the data from database
         ArrayList<String> taskNameList = new ArrayList<String>();
         ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
@@ -1075,14 +1054,13 @@ public class DashboardController implements Initializable {
 
         // displaying Area Chart
         AreaChartFX acfx = new AreaChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
-        acfx.showChart();   
-               
+        acfx.showChart();
+
     }
-    
-    
+
     // method to display scatter chart
-    public void showScatterChart(String boardName){
-        
+    public void showScatterChart(String boardName) {
+
         // to get the data from database
         ArrayList<String> taskNameList = new ArrayList<String>();
         ArrayList<Integer> taskWeightageList = new ArrayList<Integer>();
@@ -1094,11 +1072,9 @@ public class DashboardController implements Initializable {
 
         // displaying Area Chart
         ScatterChartFX scfx = new ScatterChartFX(taskNameList, taskWeightageList, "Task Names", "Weightage", boardName);
-        scfx.showChart();   
-               
+        scfx.showChart();
+
     }
-    
-    
 
     @FXML
     private void goToAnalysis(ActionEvent event) {
@@ -1108,13 +1084,11 @@ public class DashboardController implements Initializable {
 
     // variables to store status and priority id
     int statusID, priorityID;
-    
+
     // variables to store status and priority id after editing the task    
     // variables to store status and priority id after editing the task
-    int statusID1, priorityID1; 
-    
-    
-   
+    int statusID1, priorityID1;
+
     @FXML
     private void startedSelected(ActionEvent event) {
         statusID = 1;
@@ -1175,17 +1149,16 @@ public class DashboardController implements Initializable {
 //        DateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
 //        String dateString = dateFormat.format(localDate);
 //        System.out.println(dateString);
-        
         // converting  LocalDate to Date
         LocalDate localDate = deadline1.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date deadlineDate = Date.from(instant);
-        
+
         // converting Date to String
         DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         String strdeadlineDate = dateFormat.format(deadlineDate);
         System.out.println(strdeadlineDate);
-        
+
         String dateString = "27 NOV 2018";
         TaskDAO tdao = new TaskDAO();
         tdao.connect();
@@ -1207,15 +1180,14 @@ public class DashboardController implements Initializable {
         initAnswerTableColumn(Integer.parseInt(questionIDTextField.getText()));
         answerTableAnchorPane.toFront();
         answerTableAnchorPane.setVisible(true);
-        
-    }
 
+    }
 
     @FXML
     private void cancelAnswer(ActionEvent event) {
         answerTableAnchorPane.toFront();
         answerTableAnchorPane.setVisible(true);
-        
+
     }
 
     @FXML
@@ -1226,7 +1198,7 @@ public class DashboardController implements Initializable {
         TaskDAO tdao = new TaskDAO();
         tdao.connect();
         dao.Task t = tdao.getTask(selectedTaskName);
-        
+
         // code to set the existing values in the editTaskPanel
         editTaskPane.toFront();
         taskIDField1.setText("" + t.getTaskID());
@@ -1234,32 +1206,39 @@ public class DashboardController implements Initializable {
         taskNameField1.setText(t.getTaskName());
         employeeNameField1.setText(t.getEmployeeFirstName());
         weightageField1.setText(("" + t.getWeightage()));
-        
-        switch(t.getStatusID()){
-            case 1: startedSelected(new ActionEvent());
-                    break;
-            case 2: woiSelected(new ActionEvent());
-                    break;
-            case 3: stuckSelected(new ActionEvent());
-                    break;
-            case 4: halfwayPointSelected(new ActionEvent());
-                    break;
-                    
-            case 5: doneSelected(new ActionEvent());
-                    break;
- 
+
+        switch (t.getStatusID()) {
+            case 1:
+                startedSelected(new ActionEvent());
+                break;
+            case 2:
+                woiSelected(new ActionEvent());
+                break;
+            case 3:
+                stuckSelected(new ActionEvent());
+                break;
+            case 4:
+                halfwayPointSelected(new ActionEvent());
+                break;
+
+            case 5:
+                doneSelected(new ActionEvent());
+                break;
+
         }
-        
-        switch(t.getPriorityID()){
-            case 1: highSelected(new ActionEvent());
-                    break;
-            case 2: mediumSelected(new ActionEvent());
-                    break;
-            case 3: lowSelected(new ActionEvent());
-                    break;
+
+        switch (t.getPriorityID()) {
+            case 1:
+                highSelected(new ActionEvent());
+                break;
+            case 2:
+                mediumSelected(new ActionEvent());
+                break;
+            case 3:
+                lowSelected(new ActionEvent());
+                break;
         }
-        
-        
+
         editTaskPane.setVisible(true);
         tdao.closeConnection();
     }
@@ -1272,13 +1251,12 @@ public class DashboardController implements Initializable {
         LocalDate localDate = deadline1.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date deadlineDate = Date.from(instant);
-        
+
         // converting Date to String
         DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         String strdeadlineDate = dateFormat.format(deadlineDate);
         System.out.println(strdeadlineDate);
-        
-       
+
         tdao.updateTask(Integer.parseInt(taskIDField1.getText()), boardNameField1.getText(), taskNameField1.getText(), employeeNameField1.getText(), statusID1, 1, priorityID1, Integer.parseInt(weightageField1.getText()), strdeadlineDate);
         tdao.closeConnection();
         loadDataBoards();
@@ -1286,10 +1264,9 @@ public class DashboardController implements Initializable {
         boardsAnchorPane.setVisible(true);
     }
 
-
     @FXML
     private void sendMessage(ActionEvent event) {
-        try{
+        try {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
             String query = "INSERT INTO message (sender_email, receiver_email, message) values (?,?,?);";
             PreparedStatement pst = connection.prepareStatement(query);
@@ -1298,18 +1275,16 @@ public class DashboardController implements Initializable {
             pst.setString(3, postMessageTextArea.getText());
             int rows = pst.executeUpdate();
             pst.close();
-            
+
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
-            alert.setContentText(rows+" no. of messages sent successfully");
+            alert.setContentText(rows + " no. of messages sent successfully");
             alert.showAndWait();
             connection.close();
-        } catch(Exception ex){
+        } catch (Exception ex) {
             System.out.println("Exception in sendMessage()");
         }
-        
-        
-        
+
     }
 
     @FXML
@@ -1324,7 +1299,77 @@ public class DashboardController implements Initializable {
         postMessageAnchorPane.setVisible(true);
     }
 
+    @FXML
+    public void signIn(ActionEvent event) throws NoSuchAlgorithmException, InvalidKeySpecException, IOException {
+        EmployeeDAO edao = new EmployeeDAO();
+        edao.connect();
+
+        // invalid username will have an employee ID 0
+        Employee employee = edao.getEmployeeSignIn(usernameTextField.getText());
+        int empID = employee.getEmployeeID();
+
+        if (empID == 0) {
+            usernameTextField.clear();
+            passwordTextField.clear();
+            usernameValidationLabel.setText("Ïnvalid Username. Please re-enter Username");
+            usernameValidationLabel.setVisible(true);
+            usernameTextField.requestFocus();
+        } else {
+
+            // else block entered only if username exists
+            // code for checking if entered password matches the encrypted password
+            PBKDF2WithHmacSHA1 pwd = new PBKDF2WithHmacSHA1(passwordTextField.getText());
+
+            // validatePassword() will generate the hash for the entered password and then compare it with the one stored in the database
+            // returns boolean
+            boolean matched = pwd.validatePassword(pwd.password, employee.getPassword());
+
+            // if block is entered if both username and password are correct
+            if (usernameTextField.getText().equals(employee.getEmail()) && matched) {
+                //loadWindow("Dashboard.fxml", "Espresso", username.getText());
+                signinPane.toBack();
+                signinPane.setVisible(false);
+                dashboardPane.toFront();
+                System.out.println("Sign In Successful");
+
+                // code to close signinPane
+//                Stage stage = (Stage) signinPane.getScene().getWindow();
+//                stage.close();
+            }
+
+            // else if block entered if username is crroect but password is incorrect.
+            if (matched == false) {
+                usernameValidationLabel.setVisible(false);
+                passwordTextField.clear();
+                pwdValidationLabel.setText("Ïnvalid password. Please re-enter password");
+                pwdValidationLabel.setVisible(true);
+                passwordTextField.requestFocus();
+            }
+
+        }
+
+    }
     
+    
+    // method forusername validation
+    boolean validateUsername() {
+        Pattern usernamePattern = Pattern.compile("[a-zA-Z0-9][a-zA-Z0-9._]*@[a-zA-Z0-9]+([.][a-zA-Z]+)+");
+        Matcher m = usernamePattern.matcher(usernameTextField.getText());
+        if (m.find() && m.group().equals(usernameTextField.getText())) {
+            return true;
+        } else {
+            usernameValidationLabel.setText("Invalid username");
+            usernameTextField.clear();
+            usernameValidationLabel.setVisible(true);
+            usernameTextField.requestFocus();
+            return false;
+        }
+    }
+
+    @FXML
+    private void signUp(ActionEvent event) {
+        loadWindow("Signup.fxml", "Sign Up");
+    }
 
     public static class Board {
 
@@ -1351,9 +1396,7 @@ public class DashboardController implements Initializable {
         }
 
     }
-    
-    
-    
+
     public static class Log {
 
         private final SimpleIntegerProperty logID;
@@ -1384,17 +1427,13 @@ public class DashboardController implements Initializable {
             return timestamp.get();
         }
 
-
-
     }
-    
-    
+
     public static class Message {
 
         private final SimpleIntegerProperty messageID;
         private final SimpleStringProperty senderEmail;
         private final SimpleStringProperty message;
-        
 
         public Message(int messageID, String senderEmail, String message) {
             this.messageID = new SimpleIntegerProperty(messageID);
@@ -1405,7 +1444,7 @@ public class DashboardController implements Initializable {
         public int getMessageID() {
             return messageID.get();
         }
-        
+
         public String getSenderEmail() {
             return senderEmail.get();
         }
@@ -1413,15 +1452,8 @@ public class DashboardController implements Initializable {
         public String getMessage() {
             return message.get();
         }
-        
+
     }
-
-
-
-    
-        
-        
-    
 
     // creating class Task
     public static class Task {
@@ -1489,7 +1521,7 @@ public class DashboardController implements Initializable {
         System.out.println(board_name + " board selected");
         //loadWindowTask("TaskTable.fxml", "paritosh", board_name);
         //loadWindow("TaskTable.fxml", board_name);
-        
+
         initTaskColumns();
         loadDataTasks(board_name);
         taskAnchorPane.toFront();
@@ -1501,7 +1533,7 @@ public class DashboardController implements Initializable {
     @FXML
     void createNewTask(ActionEvent event) {
         // dynamically setting the task id and board name
-        
+
         // code to set the board name dynamically
         selectedBoardList = boardTableView.getSelectionModel().getSelectedItems();
         String board_name = selectedBoardList.get(0).boardName.getValue();
@@ -1570,29 +1602,20 @@ public class DashboardController implements Initializable {
         bdao.removeBoard(selectedBoardList.get(0).getBoardID());
         bdao.closeConnection();
     }
-    
-    
+
     @FXML
     private void logSeen(ActionEvent event) {
         logList = logTableView.getItems();
         selectedLogList = logTableView.getSelectionModel().getSelectedItems();
         System.out.println("Deleted Log/s");
-        
+
         selectedLogList.forEach(logList::remove);
-        
+
         LogDAO ldao = new LogDAO();
         ldao.connect();
         ldao.removeLog(selectedLogList.get(0).getLogID());
         ldao.closeConnection();
-        
-    }
-    
-    
-    
-    
-    
-  
 
-    
+    }
 
 }
