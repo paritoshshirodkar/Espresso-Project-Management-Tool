@@ -1330,6 +1330,11 @@ public class DashboardController implements Initializable {
                 signinPane.toBack();
                 signinPane.setVisible(false);
                 dashboardPane.toFront();
+                initMessageColumns();
+                loadDataMessage(usernameTextField.getText());
+                messagesAnchorPane.toFront();
+                messagesAnchorPane.setVisible(true);
+                        
                 System.out.println("Sign In Successful");
 
                 // code to close signinPane
