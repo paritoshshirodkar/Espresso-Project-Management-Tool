@@ -1143,14 +1143,14 @@ public class DashboardController implements Initializable {
         // changed variable to indicate a change in status or priority
         // 0 indicates no change, otherwise 1
         int changed = 0;
-
+        
         // converting the date to String
 //        LocalDate localDate = deadline.getValue();
 //        DateFormat dateFormat = new SimpleDateFormat("mm-dd-yyyy");
 //        String dateString = dateFormat.format(localDate);
 //        System.out.println(dateString);
         // converting  LocalDate to Date
-        LocalDate localDate = deadline1.getValue();
+        LocalDate localDate = deadline.getValue();
         Instant instant = Instant.from(localDate.atStartOfDay(ZoneId.systemDefault()));
         Date deadlineDate = Date.from(instant);
 
@@ -1158,7 +1158,7 @@ public class DashboardController implements Initializable {
         DateFormat dateFormat = new SimpleDateFormat("MM-dd-yyyy");
         String strdeadlineDate = dateFormat.format(deadlineDate);
         System.out.println(strdeadlineDate);
-
+  
         String dateString = "27 NOV 2018";
         TaskDAO tdao = new TaskDAO();
         tdao.connect();
