@@ -1180,7 +1180,8 @@ public class DashboardController implements Initializable {
         initAnswerTableColumn(Integer.parseInt(questionIDTextField.getText()));
         answerTableAnchorPane.toFront();
         answerTableAnchorPane.setVisible(true);
-
+        questionIDTextField.clear();
+        answer.clear();
     }
 
     @FXML
