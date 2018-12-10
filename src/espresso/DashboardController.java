@@ -1271,12 +1271,13 @@ public class DashboardController implements Initializable {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/pmt", "root", "");
             String query = "INSERT INTO message (sender_email, receiver_email, message) values (?,?,?);";
             PreparedStatement pst = connection.prepareStatement(query);
-            pst.setString(1, "a@b.com");
+            pst.setString(1, usernameTextField.getText());
             pst.setString(2, receiverEmailTextField.getText());
             pst.setString(3, postMessageTextArea.getText());
             int rows = pst.executeUpdate();
             pst.close();
-
+            receiverEmailTextField.clear();
+            postMessageTextArea.clear();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setHeaderText(null);
             alert.setContentText(rows + " no. of messages sent successfully");
