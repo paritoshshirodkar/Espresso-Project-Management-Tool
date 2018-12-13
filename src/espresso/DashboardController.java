@@ -918,7 +918,7 @@ public class DashboardController implements Initializable {
         adao.updateUpVotes(selectedAnswerID, upvotes);
         adao.closeConnection();
         String answer = "Upvoted " + answerTextArea.getText();
-        String deadline = "27 NOV 2018";
+        String deadline = "11-26-2018";
         LogDAO ldao = new LogDAO();
         ldao.connect();
         ldao.updateLog(ldao.highestlogID() + 1000, answer, deadline);
@@ -937,7 +937,7 @@ public class DashboardController implements Initializable {
         adao.updateDownVotes(selectedAnswerID, downvotes);
         adao.closeConnection();
         String answer = "Downvoted " + answerTextArea.getText();
-        String deadline = "27 NOV 2018";
+        String deadline = "11-26-2018";
         LogDAO ldao = new LogDAO();
         ldao.connect();
         ldao.updateLog(ldao.highestlogID() + 1000, answer, deadline);
@@ -1331,12 +1331,13 @@ public class DashboardController implements Initializable {
                 //loadWindow("Dashboard.fxml", "Espresso", username.getText());
                 signinPane.toBack();
                 signinPane.setVisible(false);
-                dashboardPane.toFront();
+                
                 initMessageColumns();
                 loadDataMessage(usernameTextField.getText());
-                messagesAnchorPane.toFront();
-                messagesAnchorPane.setVisible(true);
-                        
+                //messagesAnchorPane.toFront();
+                //messagesAnchorPane.setVisible(true);
+                dashboardPane.toFront();
+                dashboardPane.setVisible(true);
                 System.out.println("Sign In Successful");
 
                 // code to close signinPane
